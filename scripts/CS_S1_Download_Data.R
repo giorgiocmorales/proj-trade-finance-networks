@@ -1,0 +1,825 @@
+#CUNTO SANTANA (20XX)
+
+#1 IMPORT DATASETS
+
+#Clear data
+rm(list = ls())
+
+#Install packages if not already
+
+##Install imfr package (out of CRAN)-----
+install.packages("devtools")
+require(devtools)
+install_github("christophergandrud/imfr")
+
+#Load packages
+library(tidyverse)
+library(imfr)
+
+#Codes
+dots_codes <- imf_parameters("DOT")
+dots_indicators <- as_tibble(dots_codes[[3]])
+dots_areas <- as_tibble(dots_codes[[2]])
+
+#Add FMI-WEO groups
+advanced_economies <- c("AUS", "AUT", "BEL", "CAN", "CYP", "CZE","DNK", "EST", "FIN", "FRA", "DEU", "GRC", "HKG", "ISL", "ISR", "IRL", "ITA", "JPN", "KOR", "LVA", "LTU", "LUX", "MAC", "MLT", "NLD", "NZL", "NOR", "PRT", "PRI", "SMR", "SGP", "SVK", "SVN", "ESP", "SWE", "CHE", "TWN" , "GBR", "USA")
+emerging_asia <- c("BGD", "BTN", "BRN", "KHM", "CHN", "FJI", "IND", "IDN", "KIR", "LAO", "MYS", "MDV", "MHL", "FSM", "MNG", "MMR", "NRU", "NPL", 'PLW', "PNG", "PHL", "WSM", "SLV", "LKA", "THA", "TLS", "TON", "TUV", "VUT", "VNM")
+emerging_europe <- c("ALB", "BLR", "BIH", "BGR", "HRV", "HUN", "XKX", "MDA", "MNE", "MKD", "POL", "ROU", "RUS", "SRB", "TUR", "UKR")
+emerging_latam <- c("ATG", "ARG", "ABW", "BHS", "BRB", "BLZ", "BOL", "BRA", "CHL", "COL", "CRI", "DMA", "DOM", "ECU", "SLV", "GRD", "GTM", "GUY", "HTI", "HND", "JAM", "MEX", "NIC", "PAN", "PRY", "PER", "KNA", "LCA", "VCT", "SUR", "TTO", "URY", "VEN")
+emerging_meca <- c("AFG", "DZA", "ARM", "AZE", "BHR", "DJI", "EGY", "GEO", "IRN", "IRQ", "JOR", "KAZ", "KWT", "KGZ", "LBN", "LBY", "MRT", "MAR", "OMN", "PAK", "QAT", "SAU", "SOM", "SDN", "SYR", "TJK", "TUN", "TKM", "ARE", "UZB", "PSE", "YEM")
+emerging_ssafrica <- c("AGO", "BEN", "BWA", "BFA", "BDI", "CPV", "CMR", "CAF", "TCD", "COM", "COG", "COD", "CIV", "GNQ", "ERI", "SWZ", "ETH", "GAB", "GMB", "GHA", "GIN", "GNB", "KEN", "LSO", "LBR", "MDG", "MWI", "MLI", "MUS", "MOZ", "NAM", "NER", "NGA", "RWA", "STP", "SEN", "SYC", "SLE", "ZAF", "SSD", "TZA", "TGO", "UGA", "ZMB", "ZWE")
+
+#Add higher level groups
+emerging_economies <- c(emerging_asia, emerging_europe, emerging_latam, emerging_meca, emerging_ssafrica)
+imf_weo_countries <- c(advanced_economies, emerging_economies)
+
+#Create country list
+data(codelist)
+
+#Check for IMF monitored countries not in list
+imf_weo_countries[c(which(imf_weo_countries %in% codelist$iso3c == FALSE))]
+
+#Check for DOTS monitored countries not in list
+imf_dots_areas %>% 
+  filter(!(codes %in% codelist$iso2c)) %>%
+  print(n = nrow(.))
+
+##Create country list----
+country_set <- codelist %>%
+  select(country.name.en, iso2c, iso3c, imf, continent, region) %>%
+  mutate(iso2c = if_else(country.name.en == "Kosovo", "XK", iso2c),
+         iso3c = if_else(country.name.en == "Kosovo", "XKX", iso3c),
+         continent = if_else(country.name.en == "Kosovo", "Europe", continent)) %>%
+  mutate(weo_group_mayor = case_when(iso3c %in% advanced_economies ~ "Advanced Economies",
+                                     iso3c %in% emerging_economies ~ "Emerging Economies",
+                                     !iso3c %in% imf_weo_countries ~ "WEO Not-Monitored"),
+         weo_group_region = case_when(iso3c %in% advanced_economies ~ "Advanced Economies",
+                                      iso3c %in% emerging_asia ~ "Emerging and Developing Asia",
+                                      iso3c %in% emerging_europe ~ "Emerging and Developing Europe",
+                                      iso3c %in% emerging_latam ~ "Latin America and the Caribbean",
+                                      iso3c %in% emerging_meca ~ "Middle East and Central Asia",
+                                      iso3c %in% emerging_ssafrica ~ "Sub-Saharan Africa",
+                                      !iso3c %in% imf_weo_countries ~ "WEO Not-Monitored")) %>%
+  filter(!is.na(imf) & !is.na(iso2c), iso2c %in% dots_areas$input_code)
+
+rm(imf_weo_countries, advanced_economies, emerging_economies, emerging_asia, emerging_europe, emerging_latam, emerging_meca, emerging_ssafrica)
+rm(codelist)
+
+
+##Former countries dataframe----
+former_countries <- tibble(country.name.en = c("Former Czechoslovakia", "East Germany", "Serbia and Montenegro", "Netherlands Antilles", "Former U.S.S.R.", "Yemen Arab Rep.", "Yemen, P.D. Rep.", "Former Yugoslavia" ),
+                           iso2c = c("CSH", "DE2", "CS", "AN", "SUH","1C_473", "1C_459", "YUC"),
+                           iso3c = c("CSH", "DDD", "SCG", "ANT", "SUN", "YAR", "YMD", "YUG"),
+                           imf = c(200, 278, 891, 530, 810, "NA", 720, 891),
+                           continent = c("Europe", "Europe", "Europe", "Americas", "Europe", "Asia", "Asia", "Europe"),
+                           region = c("Europe and Central Asia", "Europe and Central Asia", "Europe and Central Asia", "Latin America & Caribbean", "Europe and Central Asia", "Middle East & North Africa", "Middle East & North Africa",  "Europe and Central Asia"),
+                           weo_group_mayor = "Former Countries",
+                           weo_group_region = "Former Countries")
+
+##Definitive country set-----
+country_set <- rbind(country_set, former_countries)
+
+#Biltaeral Exports Dataset-------
+
+##Set years to import data----
+start_year <- 2000
+end_year <- 2021
+
+##1.1 DOTS Exports----
+
+#Initialize empty dadatset for CDIS Outward
+dots_exports_base <- tibble()
+
+#Vector to keep track of download and resume in case of interruption
+countries_leftout <- c("TW")
+
+###Download loop----
+for(i in c(country_set$iso2c)[! country_set$iso2c %in% countries_leftout]){
+  
+  dots <- imf_dataset(database_id = "DOT", 
+                      indicator = "TXG_FOB_USD", 
+                      ref_area = i, 
+                      freq = "A", 
+                      start = start_year,
+                      end = end_year,
+                      return_raw = TRUE) %>% filter(`@FREQ` == "A", `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>% #CHECK
+    mutate(Obs = map(Obs, as.data.frame)) %>% #CHECK
+    unnest(Obs) %>%  #CHECK
+    mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>% #Setting country names as characters 
+    replace_na(list(`@REF_AREA` = "NA")) #Normal Download 
+  
+  if ("X..TIME_PERIOD" %in% colnames(dots) | "X.OBS_VALUE" %in% colnames(dots)) { #If conditional to check if there are repeating columns with trade values
+    
+    col_combine_1 <- c("@TIME_PERIOD","X.TIME_PERIOD") #Names of the columns that will be combined (Time)
+    
+    col_combine_2 <- c("@OBS_VALUE" , "X.OBS_VALUE" ) #Names of the columns that will be combined (Trade values)
+    
+    dots <- cbind('@TIME_PERIOD' = na.omit(unlist(dots[,col_combine_1])),
+                  dots[,!colnames(dots) %in% col_combine_1, drop = FALSE])  #Combining the columns
+    
+    dots <- cbind('@OBS_VALUE' = na.omit(unlist(dots[,col_combine_2])),
+                  dots[,!colnames(dots) %in% col_combine_2, drop = FALSE]) #Combining the columns
+  }
+  
+  dots <- dots %>% mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), `@UNIT_MULT` = as.numeric(`@UNIT_MULT`)) %>% #Setting the trade values as numeric variables
+    mutate(`@OBS_VALUE_2` = `@OBS_VALUE`*10^(`@UNIT_MULT`)) %>% #Calculating trade values in normal dollars (not millions)
+    select(c(`@REF_AREA`,`@COUNTERPART_AREA`,`@TIME_PERIOD`,`@OBS_VALUE_2`)) #Selecting desired columns/data 
+  
+  
+  dots_exports_base <- rbind(dots_exports_base, dots) #Adding the downloaded data to the aggregate dataset
+  countries_leftout <- c(countries_leftout,i) #IDK
+  rm(dots) #Removing dots
+}
+
+##1.2 DOTS Exports----
+
+##1.3 CDIS Inward-----
+
+#Initialize empy dadatsets for CDIS Inward
+cdis_inward_base <- tibble()
+
+#Set years for data import
+start_year <- 2009
+end_year <- 2022
+
+#Initialize vector to keep track of which countries have been processed
+countries_leftout <- c()
+
+#Prepare progress bar for download
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
+print(total_countries)
+progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
+
+### Download loop
+for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
+  country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
+  
+  # Initialize 'cdis' before the try block to ensure it exists
+  cdis <- tibble()
+  
+  tryCatch({
+    cdis <- imf_dataset(database_id = "CDIS", 
+                        indicator = "IIW_BP6_USD",
+                        ref_area = country_code, 
+                        freq = "A", 
+                        start = start_year,
+                        end = end_year,
+                        return_raw = TRUE) %>% 
+      filter(`@FREQ` == "A",
+             `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>%
+      mutate(Obs = map(Obs, as.data.frame)) %>%
+      unnest(Obs) %>%
+      mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
+      replace_na(list(`@REF_AREA` = "NA"))
+    
+    if ("X.TIME_PERIOD" %in% colnames(cdis) | "X.OBS_VALUE" %in% colnames(cdis)) {
+      cdis <- cdis %>% 
+        unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE) %>%
+        unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE)
+    }
+    
+  }, error = function(e) {
+    warning(sprintf("Failed to retrieve data for country: %s. Error: %s", country_code, e$message))
+  })
+  
+  # Append the downloaded data to the aggregate dataset
+  if (nrow(cdis) > 0) {
+    cdis_inward_base <- bind_rows(cdis_inward_base, cdis)
+  }
+  rm(cdis)
+  # Update Progress Bar
+  setTxtProgressBar(progress_bar, i)
+}
+
+# Close Progress Bar
+close(progress_bar)
+
+#Edit base for processing
+cdis_inward_base <- cdis_inward_base %>% 
+  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
+         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
+         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
+
+#Change column names for ease of use
+cdis_inward_base <- cdis_inward_base %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
+  rename(frequency = `@FREQ`,
+         indicator = `@INDICATOR`,
+         unit_mult = `@UNIT_MULT`,
+         jurisdiction_iso3 = iso3c.x,
+         jurisdiction_iso2 = `@REF_AREA`,
+         counterpart_iso3 = iso3c.y,
+         counterpart_iso2 = `@COUNTERPART_AREA`,
+         year = `@TIME_PERIOD`, 
+         position = `@OBS_VALUE`,
+         position_adj = `@OBS_VALUE_ADJUSTED`,
+         obs_status = `@OBS_STATUS`) %>%
+  filter(!(is.na(position_adj) & is.na(obs_status)))
+
+#Check how many confidentail registries are
+sum(cdis_inward_base$obs_status == "C", na.rm = TRUE)
+
+#Negative registries
+sum(cdis_inward_base$position < 0, na.rm = TRUE)
+sum(cdis_inward_base$position < 0, na.rm = TRUE)/length(cdis_inward_base$position)*100
+
+#Zero registries
+sum(cdis_inward_base$position == 0, na.rm = TRUE)
+sum(cdis_inward_base$position == 0, na.rm = TRUE)/length(cdis_inward_base$position)*100
+
+#Inflationary adjustment and final filter
+cdis_inward_base <- cdis_inward_base %>%
+  mutate(year = as.numeric(year)) %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
+  rename(indicator = `indicator.x`) %>%
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
+
+##1.4 CDIS Outward ------
+
+#Initialize empty dadatset for CDIS Outward
+cdis_outward_base <- tibble()
+
+#Set years for data import
+start_year <- 2009
+end_year <- 2022
+
+#Initialize vector to keep track of which countries have been processed
+countries_leftout <- c()
+
+#Prepare progress bar for download
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
+print(total_countries)
+progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
+
+### Download loop
+for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
+  country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
+  
+  # Initialize 'cdis' before the try block to ensure it exists
+  cdis <- tibble()
+  
+  tryCatch({
+    cdis <- imf_dataset(database_id = "CDIS", 
+                        indicator = "IOW_BP6_USD",
+                        ref_area = country_code, 
+                        freq = "A", 
+                        start = start_year,
+                        end = end_year,
+                        return_raw = TRUE) %>% 
+      filter(`@FREQ` == "A",
+             `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>%
+      mutate(Obs = map(Obs, as.data.frame)) %>%
+      unnest(Obs) %>%
+      mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
+      replace_na(list(`@REF_AREA` = "NA"))
+    
+    if ("X.TIME_PERIOD" %in% colnames(cdis) | "X.OBS_VALUE" %in% colnames(cdis)) {
+      cdis <- cdis %>% 
+        unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE) %>%
+        unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE)
+    }
+    
+  }, error = function(e) {
+    warning(sprintf("Failed to retrieve data for country: %s. Error: %s", country_code, e$message))
+  })
+  
+  # Append the downloaded data to the aggregate dataset
+  if (nrow(cdis) > 0) {
+    cdis_outward_base <- bind_rows(cdis_outward_base, cdis)
+  }
+  
+  # Update Progress Bar
+  setTxtProgressBar(progress_bar, i)
+}
+
+# Close Progress Bar
+close(progress_bar)
+
+#Edit base for processing
+cdis_outward_base <- cdis_outward_base %>% 
+  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
+         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
+         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
+
+#Change column names for ease of use
+cdis_outward_base <- cdis_outward_base %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
+  rename(frequency = `@FREQ`,
+         indicator = `@INDICATOR`,
+         unit_mult = `@UNIT_MULT`,
+         jurisdiction_iso3 = iso3c.x,
+         jurisdiction_iso2 = `@REF_AREA`,
+         counterpart_iso3 = iso3c.y,
+         counterpart_iso2 = `@COUNTERPART_AREA`,
+         year = `@TIME_PERIOD`, 
+         position = `@OBS_VALUE`,
+         position_adj = `@OBS_VALUE_ADJUSTED`,
+         obs_status = `@OBS_STATUS`) %>%
+  filter(!(is.na(position_adj) & is.na(obs_status)))
+
+#Check for confidential
+sum(cdis_outward_base$obs_status == "C", na.rm = TRUE)
+
+#Check for negative
+sum(cdis_outward_base$position < 0, na.rm = TRUE)
+sum(cdis_outward_base$position < 0, na.rm = TRUE)/length(cdis_outward_base$position)*100
+
+#Check for zero
+sum(cdis_outward_base$position == 0, na.rm = TRUE)
+sum(cdis_outward_base$position == 0, na.rm = TRUE)/length(cdis_outward_base$position)*100
+
+#Inflationary adjustment
+cdis_outward_base <- cdis_outward_base %>%
+  mutate(year = as.numeric(year)) %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
+  rename(indicator = `indicator.x`) %>% 
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
+
+##1.5 CPIS Assets -----
+
+#Initialize empy dadatsets for CPIS Assets
+cpis_assets_base <- tibble()
+
+#Set years for data import
+start_year <- 2001
+end_year <- 2022
+
+#Initialize vector to keep track of which countries have been processed
+countries_leftout <- c()
+
+#Prepare progress bar for download
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
+print(total_countries)
+progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
+
+### Download loop
+for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
+  country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
+  
+  # Initialize 'cpis' before the try block to ensure it exists
+  cpis <- tibble()
+  
+  tryCatch({
+    cpis <- imf_dataset(database_id = "CPIS", 
+                        indicator = "I_A_T_T_T_BP6_USD",
+                        ref_area = country_code, 
+                        freq = "A", 
+                        start = start_year,
+                        end = end_year,
+                        ref_sector = "T",
+                        counterpart_sector = "T",
+                        return_raw = TRUE) %>% 
+      filter(`@FREQ` == "A",
+             `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>%
+      mutate(Obs = map(Obs, as.data.frame)) %>%
+      unnest(Obs) %>%
+      mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
+      replace_na(list(`@REF_AREA` = "NA"))
+    
+    if ("X.TIME_PERIOD" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE)
+    }
+    
+    if ("X.OBS_VALUE" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE)
+    }
+    
+    if ("X.OBS_STATUS" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@OBS_STATUS", c("@OBS_STATUS", "X.OBS_STATUS"), na.rm = TRUE)
+    }
+    
+  }, error = function(e) {
+    warning(sprintf("Failed to retrieve data for country: %s. Error: %s", country_code, e$message))
+  })
+  
+  # Append the downloaded data to the aggregate dataset
+  if (nrow(cpis) > 0) {
+    cpis_assets_base <- bind_rows(cpis_assets_base, cpis)
+  }
+  
+  #Remove cpis to reset
+  rm(cpis)
+  
+  # Update Progress Bar
+  setTxtProgressBar(progress_bar, i)
+}
+
+# Close Progress Bar
+close(progress_bar)
+
+#Edit base for processing
+cpis_assets_base <- cpis_assets_base %>% 
+  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
+         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
+         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
+
+#Change column names for ease of use
+cpis_assets_base <- cpis_assets_base %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
+  rename(frequency = `@FREQ`,
+         indicator = `@INDICATOR`,
+         unit_mult = `@UNIT_MULT`,
+         jurisdiction_iso3 = iso3c.x,
+         jurisdiction_iso2 = `@REF_AREA`,
+         counterpart_iso3 = iso3c.y,
+         counterpart_iso2 = `@COUNTERPART_AREA`,
+         year = `@TIME_PERIOD`, 
+         position = `@OBS_VALUE`,
+         position_adj = `@OBS_VALUE_ADJUSTED`,
+         obs_status = `@OBS_STATUS`) %>%
+  filter(!(is.na(position_adj) & is.na(obs_status)))
+
+#Check for confidential
+sum(cpis_assets_base$obs_status == "C", na.rm = TRUE)
+
+#Check for negative values
+sum(cpis_assets_base$position < 0, na.rm = TRUE)
+sum(cpis_assets_base$position < 0, na.rm = TRUE)/length(cpis_assets_base$position)*100
+
+#Check for 0 values
+sum(cpis_assets_base$position == 0, na.rm = TRUE)
+sum(cpis_assets_base$position == 0, na.rm = TRUE)/length(cpis_assets_base$position)*100
+
+#Inflationary adjustment
+cpis_assets_base <- cpis_assets_base %>%
+  mutate(year = as.numeric(year)) %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
+  rename(indicator = `indicator.x`) %>%
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
+
+##1.6 CPIS liabilities-----
+
+#Initialize empy dadatsets for CPIS
+cpis_liabilities_base <- tibble()
+
+start_year <- 2001
+end_year <- 2022
+
+#Initialize vector to keep track of which countries have been processed
+countries_leftout <- c()
+
+#Prepare progress bar for download
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
+print(total_countries)
+progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
+
+### Download loop
+for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
+  country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
+  
+  # Initialize 'cpis' before the try block to ensure it exists
+  cpis <- tibble()
+  
+  tryCatch({
+    cpis <- imf_dataset(database_id = "CPIS", 
+                        indicator = "I_L_T_T_T_BP6_USD",
+                        ref_area = country_code, 
+                        freq = "A", 
+                        start = start_year,
+                        end = end_year,
+                        ref_sector = "T",
+                        counterpart_sector = "T",
+                        return_raw = TRUE) %>% 
+      filter(`@FREQ` == "A",
+             `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>%
+      mutate(Obs = map(Obs, as.data.frame)) %>%
+      unnest(Obs) %>%
+      mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
+      replace_na(list(`@REF_AREA` = "NA"))
+    
+    if ("X.TIME_PERIOD" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE)
+    }
+    
+    if ("X.OBS_VALUE" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE)
+    }
+    
+    if ("X.OBS_STATUS" %in% colnames(cpis)) {
+      cpis <- cpis %>% 
+        unite("@OBS_STATUS", c("@OBS_STATUS", "X.OBS_STATUS"), na.rm = TRUE)
+    }
+    
+  }, error = function(e) {
+    warning(sprintf("Failed to retrieve data for country: %s. Error: %s", country_code, e$message))
+  })
+  
+  # Append the downloaded data to the aggregate dataset
+  if (nrow(cpis) > 0) {
+    cpis_liabilities_base <- bind_rows(cpis_liabilities_base, cpis)
+  }
+  
+  #Remove cpis to reset
+  rm(cpis)
+  
+  # Update Progress Bar
+  setTxtProgressBar(progress_bar, i)
+}
+
+# Close Progress Bar
+close(progress_bar)
+
+#Edit base for processing
+cpis_liabilities_base <- cpis_liabilities_base %>%
+  unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE) %>%
+  unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE) %>%
+  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
+         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
+         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
+
+#Change column names for ease of use
+cpis_liabilities_base <- cpis_liabilities_base %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
+  rename(frequency = `@FREQ`,
+         indicator = `@INDICATOR`,
+         unit_mult = `@UNIT_MULT`,
+         jurisdiction_iso3 = iso3c.x,
+         jurisdiction_iso2 = `@REF_AREA`,
+         counterpart_iso3 = iso3c.y,
+         counterpart_iso2 = `@COUNTERPART_AREA`,
+         year = `@TIME_PERIOD`, 
+         position = `@OBS_VALUE`,
+         position_adj = `@OBS_VALUE_ADJUSTED`,
+         obs_status = `@OBS_STATUS`) %>%
+  filter(!(is.na(position_adj) & is.na(obs_status)))
+
+#Inflationary adjustment
+cpis_liabilities_base <- cpis_liabilities_base %>%
+  mutate(year = as.numeric(year)) %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
+  rename(indicator = `indicator.x`) %>%
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
+
+#Check for confidential
+sum(cpis_liabilities_base$obs_status == "C", na.rm = TRUE)
+
+#Check for negative values
+sum(cpis_liabilities_base$position < 0, na.rm = TRUE)
+sum(cpis_liabilities_base$position < 0, na.rm = TRUE)/length(cpis_liabilities_base$position)*100
+
+#Check for zero values
+sum(cpis_liabilities_base$position == 0, na.rm = TRUE)
+sum(cpis_liabilities_base$position == 0, na.rm = TRUE)/length(cpis_liabilities_base$position)*100
+
+##1.7 BIS LBS -----
+
+#Doqwnload Locational Banking Statistics
+lbs_base <- fetch_dataset(dest.dir = tempdir(),
+                          bis.url = "https://data.bis.org/static/bulk/",
+                          dataset = "WS_LBS_D_PUB_csv_col.zip",
+                          exdir = tempdir(),
+                          header = TRUE,
+                          sep = ',',
+                          stringsAsFactors = FALSE,
+                          check.names = FALSE,
+                          na.strings = "",
+                          quote = "\"",
+                          fill = TRUE)
+
+#Tibble of parent country
+lbs_parent_country <- lbs_base %>%
+  distinct(L_PARENT_CTY, `Parent country`) %>%
+  as_tibble() %>%
+  rename(country_code = L_PARENT_CTY, country_name = `Parent country`)
+
+#Check not in country_set
+lbs_parent_country %>% 
+  filter(!(country_code %in% country_set$iso2c)) %>%
+  print(n = nrow(.))
+
+#Tibble of reporting countries 
+lbs_reporting_country <- lbs_base %>%
+  distinct(L_REP_CTY, `Reporting country`) %>%
+  as_tibble() %>%
+  rename(country_code = L_REP_CTY, country_name = `Reporting country`)
+
+#Check not in country_set
+lbs_reporting_country %>% 
+  filter(!(country_code %in% country_set$iso2c)) %>%
+  print(n = nrow(.))
+
+#Tibble of counterpart countries
+lbs_counterpart_country <- lbs_base %>%
+  distinct(L_CP_COUNTRY, `Counterparty country`) %>%
+  as_tibble() %>%
+  rename(country_code = L_CP_COUNTRY, country_name = `Counterparty country`)
+
+#Check not in country_set
+lbs_counterpart_country %>% 
+  filter(!(country_code %in% country_set$iso2c)) %>%
+  print(n = nrow(.))
+
+#Filter for processing 
+lbs_base_filtered <- tibble()
+
+lbs_base_filtered <- lbs_base %>%
+  #Fix Curacaso
+  mutate(L_PARENT_CTY = case_when(L_PARENT_CTY == "CW" ~ "1C_355", TRUE ~ L_PARENT_CTY),
+         L_REP_CTY = case_when(L_REP_CTY == "CW" ~ "1C_355", TRUE ~ L_REP_CTY),
+         L_CP_COUNTRY = case_when(L_CP_COUNTRY == "CW" ~ "1C_355", TRUE ~ L_CP_COUNTRY)) %>%
+  #Filters:
+  #Only counterpart countries in country set
+  filter(L_CP_COUNTRY %in% c(country_set$iso2c),
+         #Only reporting countries in country set
+         L_REP_CTY %in% c(country_set$iso2c),
+         #Parent country all
+         L_PARENT_CTY == "5J",
+         #Ammounts outstanding/stocks
+         L_MEASURE == "S",
+         #All instruments
+         L_INSTR == "A",
+         #All currencies
+         L_DENOM == "TO1",
+         #All currencies
+         L_CURR_TYPE == "A",
+         #All types of intitutions
+         L_REP_BANK_TYPE == "A",
+         #All counterpart sectors
+         L_CP_SECTOR == "A",
+         #Cross border positions
+         L_POS_TYPE == "N")
+
+rm(lbs_counterpart_country, lbs_parent_country, lbs_reporting_country)
+
+#Pivot 
+lbs_base_filtered <- lbs_base_filtered  %>%
+  pivot_longer(cols = -c(1:31),
+               names_to = "date",
+               values_to = "position")
+
+#Filter by year
+lbs_base_filtered <- lbs_base_filtered %>%
+  mutate(year = as.numeric(substr(date, 1, 4)),  # Extracts the first four characters as the year
+         quarter = substr(date, 6, 8)) %>%  # Extracts the last part as the quarter
+  filter(quarter == "Q4", #Filter to retain only entries from the fourth quarter
+         year <= end_year) #Filter to only get data up until final year
+
+#Count Nas
+sum(lbs_base_filtered$position == "NaN", na.rm = TRUE)
+sum(is.na(lbs_base_filtered$position))
+
+#Count zeroes
+sum(lbs_base_filtered$position == 0, na.rm = TRUE)
+
+#Arrange
+lbs_base_filtered <- lbs_base_filtered %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c("L_REP_CTY" = "iso2c")) %>%
+  left_join(country_set[, c("iso2c", "iso3c")], by = c("L_CP_COUNTRY" = "iso2c")) %>%
+  rename(jurisdiction_iso2 = L_REP_CTY,
+         jurisdiction_iso3 = iso3c.x,
+         counterpart_iso2 =  L_CP_COUNTRY,
+         counterpart_iso3 = iso3c.y,
+         indicator = Series) %>%
+  mutate(across(position, ~replace(., is.nan(.), NA)),
+         position_adj = position*10^6) %>%
+  filter(position != 0) %>%
+  drop_na(position)
+
+
+#Split
+lbs_claims_base <- tibble()
+
+lbs_claims_base <- lbs_base_filtered %>%
+  filter(L_POSITION == "C")
+
+lbs_liabilities_base <- tibble()
+
+lbs_liabilities_base <- lbs_base_filtered %>%
+  filter(L_POSITION == "L")
+
+#Inflationary adjustment
+lbs_claims_base <- lbs_claims_base %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, indicator.x) %>%
+  rename(indicator = indicator.x)
+
+lbs_liabilities_base <- lbs_liabilities_base %>%
+  left_join(., usa_gdp_deflator, by = "year") %>%
+  mutate(position_adj_cons = position_adj/deflator*100) %>%
+  select(year, jurisdiction_iso2, counterpart_iso2, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, indicator.x) %>%
+  rename(indicator = indicator.x)
+
+#Sum instances of negative positions
+sum(lbs_claims_base$position < 0, na.rm = TRUE)
+sum(lbs_liabilities_base$position < 0, na.rm = TRUE)
+
+#Remove redundant bases
+rm(lbs_base, lbs_base_filtered)
+rm(progress_bar)
+
+
+#1.8 Find common countries and generate summaries-----
+
+# Define the function to extract unique countries by year from a dataset, considering both jurisdiction and counterpart ISO3 codes
+extract_countries_by_year <- function(data) {
+  data %>%
+    select(year, jurisdiction_iso3, counterpart_iso3) %>%
+    pivot_longer(cols = c(jurisdiction_iso3, counterpart_iso3), names_to = "type", values_to = "country_iso3") %>%
+    distinct(year, country_iso3) %>%
+    group_by(year) %>%
+    summarize(countries = list(unique(country_iso3)), .groups = 'drop')
+}
+
+# Define the function to find common countries across multiple datasets by year
+find_common_countries <- function(list_of_dfs) {
+  # Extract countries by year for each dataset
+  countries_by_year <- lapply(list_of_dfs, extract_countries_by_year)
+  
+  # Initialize the common_countries data frame with years from the first dataset
+  common_countries <- countries_by_year[[1]]
+  
+  # Iterate through the rest of the datasets to find the intersection
+  for (i in 2:length(countries_by_year)) {
+    common_countries <- common_countries %>%
+      left_join(countries_by_year[[i]], by = "year", suffix = c("", ".y")) %>%
+      mutate(countries = map2(countries, countries.y, intersect)) %>%
+      select(-countries.y)
+  }
+  
+  common_countries
+}
+
+# Define the function to generate descriptive summary
+generate_summary <- function(data, confidential_col = NULL) {
+  data %>%
+    summarise(
+      Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+      `Areas` = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+      `Links` = n(),
+      `Confidential` = if (!is.null(confidential_col) && confidential_col %in% names(data)) sum(data[[confidential_col]] == "C", na.rm = TRUE) else NA,
+      `Min` = min(position/1000, na.rm = TRUE),
+      `Max` = max(position/1000, na.rm = TRUE),
+      `Mean` = mean(position/1000, na.rm = TRUE),
+      `Median` = median(position/1000, na.rm = TRUE),
+      `Std Dev` = sd(position/1000, na.rm = TRUE)
+    )
+}
+
+# Load datasets (ensure they are available in the environment)
+datasets <- list(
+  `CDIS Inward` = cdis_inward_base,
+  `CDIS Outward` = cdis_outward_base,
+  `CPIS Assets` = cpis_assets_base,
+  `CPIS Liabilities` = cpis_liabilities_base,
+  `LBS Claims` = lbs_claims_base,
+  `LBS Liabilities` = lbs_liabilities_base
+)
+
+datasets_assets <- list(
+  `CDIS Outward` = cdis_outward_base,
+  `CPIS Assets` = cpis_assets_base,
+  `LBS Claims` = lbs_claims_base
+)
+
+# Generate summaries for all datasets
+summary_all <- lapply(datasets, function(data) generate_summary(data, confidential_col = "obs_status"))
+summary_table_all <- bind_rows(summary_all, .id = "Dataset")
+
+# Ensure the common countries are correctly identified for assets, claims, and outward datasets
+common_countries_assets <- find_common_countries(datasets_assets)
+common_countries_assets <- common_countries_assets %>% pull(countries) %>% unlist() %>% unique()
+
+cdis_outward_filtered <- filter(cdis_outward_base, jurisdiction_iso3 %in% common_countries_assets  & counterpart_iso3 %in% common_countries_assets) %>% filter(year >= 2009)
+cpis_assets_filtered <- filter(cpis_assets_base, jurisdiction_iso3 %in% common_countries_assets  & counterpart_iso3 %in% common_countries_assets) %>% filter(year >= 2009)
+lbs_claims_filtered <- filter(lbs_claims_base, jurisdiction_iso3 %in% common_countries_assets  & counterpart_iso3 %in% common_countries_assets) %>% filter(year >= 2009)
+
+summary_assets <- list(
+  `CDIS Outward` = generate_summary(cdis_outward_filtered, confidential_col = "obs_status"),
+  `CPIS Assets` = generate_summary(cpis_assets_filtered, confidential_col = "obs_status"),
+  `LBS Claims` = generate_summary(lbs_claims_filtered)
+)
+
+summary_table_assets <- bind_rows(summary_assets, .id = "Dataset")
+
+##1.8 Keep only outward datasets
+
+#1.9 Join data sets----
+
+# Add a new column indicating the dataset source
+cdis_outward_filtered <- cdis_outward_filtered %>% mutate(source = "CDIS Outward")
+cpis_assets_filtered <- cpis_assets_filtered %>% mutate(source = "CPIS Assets")
+lbs_claims_filtered <- lbs_claims_filtered %>% mutate(source = "LBS Claims")
+
+# Combine the datasets
+combined_assets_base <- bind_rows(cdis_outward_filtered, cpis_assets_filtered, lbs_claims_filtered)
+
+# Display the combined dataset
+head(combined_assets_base)
