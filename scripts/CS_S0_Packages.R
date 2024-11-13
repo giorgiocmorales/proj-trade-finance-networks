@@ -2,61 +2,40 @@
 
 #0 INSTALL AND LOAD PACKAGES
 
-#Install packages if not already
+# Install devtools if not installed
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+library(devtools)
 
-##Install imfr package (out of CRAN)-----
-install.packages("devtools")
-require(devtools)
-install_github("christophergandrud/imfr")
+# Install imfr package (GitHub, outside CRAN) if not installed
+if (!requireNamespace("imfr", quietly = TRUE)) install_github("christophergandrud/imfr")
+library(imfr)
 
-##Load packages-----
+# Function to check and load packages
+load_packages <- function(packages) {
+  for (pkg in packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      install.packages(pkg)
+    }
+    library(pkg, character.only = TRUE)
+  }
+}
 
-#For data management
-library(tidyverse) #For syntax ease
-library(imfr) #Download imfr data
-library(BISdata) #Download BIS data
-library(countrycode) #Country data
-library(pbapply) #For progress bar
-library(purrr)
-library(moments)
+packages <- c("tidyverse", "BISdata", "countrycode", "pbapply", "purrr", "moments", #Data management packages
+              "igraph", "BBmisc", #For network analysis
+              "ggraph", "circlize", "cowplot", "gridExtra", "grid", "ggpubr", "gridGraphics", "ggplotify", "ggrepel", #For visualization
+              "tinytex", "extrafont", "rmdwc", "knitr", "kableExtra", "apaTables", "tinylabels", #For R-Markdown formatting
+              "papaja", "dplyr", "tidyr", "plm", "stargazer", "panelvar", "pwt10" #For performing P-VAR
+              ) 
 
-#For network analysis
-library(igraph)
-library(BBmisc) #Miscelanous functions for normalization
+# Load all packages
+load_packages(packages)
+rm(packages)
 
-#For visualization
-library(ggraph)
-library(circlize)
-library(cowplot)
-library(gridExtra)
-library(grid)
-library(ggpubr)
-library(gridGraphics)
-library(ggplotify)
-library(ggrepel)
-
-#For markdown
-library(tinytex)
-library(extrafont)
-library(rmdwc)
-library(knitr)
-library(kableExtra)
-library(moments)
-library(apaTables)
-library(tinylabels)
-library(papaja)
-library(dplyr)
-library(tidyr)
-
-#PVAR
-library(plm)
-library(stargazer)
-library(panelvar)
-library(pwt10)
-
-#Set path to import/save files
-setPath <- dirname(rstudioapi::getSourceEditorContext()$path) #Gets the folder name where the directory of this script is located
-
-#Set working directory on path
-setwd(setPath)
-getwd()
+# Set the path to import/save files based on the script’s directory
+if (requireNamespace("rstudioapi", quietly = TRUE)) {
+  setPath <- dirname(rstudioapi::getSourceEditorContext()$path) # Get the folder of the current script
+  setwd(setPath)
+  print(paste("Working directory set to:", getwd()))
+} else {
+  warning("rstudioapi package not found. Please set the working directory manually.")
+}

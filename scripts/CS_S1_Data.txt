@@ -5,7 +5,7 @@
 #Clear data
 rm(list = ls())
 
-#1.0 Prepare country selection-----
+#1.0 Prepare countries
 
 #Explore data for DOTS
 dots_codes <- imf_parameters("DOT")
@@ -25,68 +25,14 @@ cpis_indicators <- as_tibble(cpis_codes[[3]])
 cpis_areas <- as_tibble(cpis_codes[[2]])
 rm(cpis_codes)
 
-##Create country list from WEO----
-
+#Create country list from WEO----
 #Add FMI-WEO groups
-
-advanced_economies <- c(
-  # Europe
-  "AUT", "BEL", "CYP", "CZE", "DNK", "EST", "FIN", "FRA", "DEU", "GRC",
-  "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "NOR", "PRT", "SVK", 
-  "SVN", "ESP", "SWE", "CHE", "GBR",
-  
-  # North America
-  "CAN", "USA",
-  
-  # Asia and Oceania
-  "AUS", "HKG", "ISL", "ISR", "JPN", "KOR", "NZL", "SGP", "TWN",
-  
-  # Other
-  "MAC", "SMR", "PRI"  # Including territories like Macao and Puerto Rico
-)
-
-# Emerging Asia by Subregion
-emerging_asia <- c(
-  # South Asia
-  "BGD", "BTN", "IND", "MDV", "NPL", "LKA",
-  
-  # Southeast Asia and East Asia
-  "BRN", "KHM", "CHN", "FJI", "IDN", "LAO", "MYS", "MNG", "MMR", "PHL", "THA", "VNM",
-  
-  # Pacific Islands
-  "KIR", "MHL", "FSM", "NRU", "PLW", "PNG", "WSM", "SLV", "TLS", "TON", "TUV", "VUT"
-)
-
-# Emerging Europe by Country
-emerging_europe <- c(
-  "ALB", "BLR", "BIH", "BGR", "HRV", "HUN", "XKX", "MDA", "MNE", "MKD", 
-  "POL", "ROU", "RUS", "SRB", "TUR", "UKR"
-)
-
-# Latin America and Caribbean (Emerging)
-emerging_latam <- c(
-  "ATG", "ARG", "ABW", "BHS", "BRB", "BLZ", "BOL", "BRA", "CHL", "COL", 
-  "CRI", "DMA", "DOM", "ECU", "SLV", "GRD", "GTM", "GUY", "HTI", "HND", 
-  "JAM", "MEX", "NIC", "PAN", "PRY", "PER", "KNA", "LCA", "VCT", "SUR", 
-  "TTO", "URY", "VEN"
-)
-
-# Middle East and Central Asia (Emerging)
-emerging_meca <- c(
-  "AFG", "DZA", "ARM", "AZE", "BHR", "DJI", "EGY", "GEO", "IRN", "IRQ", 
-  "JOR", "KAZ", "KWT", "KGZ", "LBN", "LBY", "MRT", "MAR", "OMN", "PAK", 
-  "QAT", "SAU", "SOM", "SDN", "SYR", "TJK", "TUN", "TKM", "ARE", "UZB", 
-  "PSE", "YEM"
-)
-
-# Sub-Saharan Africa (Emerging)
-emerging_ssafrica <- c(
-  "AGO", "BEN", "BWA", "BFA", "BDI", "CPV", "CMR", "CAF", "TCD", "COM", 
-  "COG", "COD", "CIV", "GNQ", "ERI", "SWZ", "ETH", "GAB", "GMB", "GHA", 
-  "GIN", "GNB", "KEN", "LSO", "LBR", "MDG", "MWI", "MLI", "MUS", "MOZ", 
-  "NAM", "NER", "NGA", "RWA", "STP", "SEN", "SYC", "SLE", "ZAF", "SSD", 
-  "TZA", "TGO", "UGA", "ZMB", "ZWE"
-)
+advanced_economies <- c("AUS", "AUT", "BEL", "CAN", "CYP", "CZE","DNK", "EST", "FIN", "FRA", "DEU", "GRC", "HKG", "ISL", "ISR", "IRL", "ITA", "JPN", "KOR", "LVA", "LTU", "LUX", "MAC", "MLT", "NLD", "NZL", "NOR", "PRT", "PRI", "SMR", "SGP", "SVK", "SVN", "ESP", "SWE", "CHE", "TWN" , "GBR", "USA")
+emerging_asia <- c("BGD", "BTN", "BRN", "KHM", "CHN", "FJI", "IND", "IDN", "KIR", "LAO", "MYS", "MDV", "MHL", "FSM", "MNG", "MMR", "NRU", "NPL", 'PLW', "PNG", "PHL", "WSM", "SLV", "LKA", "THA", "TLS", "TON", "TUV", "VUT", "VNM")
+emerging_europe <- c("ALB", "BLR", "BIH", "BGR", "HRV", "HUN", "XKX", "MDA", "MNE", "MKD", "POL", "ROU", "RUS", "SRB", "TUR", "UKR")
+emerging_latam <- c("ATG", "ARG", "ABW", "BHS", "BRB", "BLZ", "BOL", "BRA", "CHL", "COL", "CRI", "DMA", "DOM", "ECU", "SLV", "GRD", "GTM", "GUY", "HTI", "HND", "JAM", "MEX", "NIC", "PAN", "PRY", "PER", "KNA", "LCA", "VCT", "SUR", "TTO", "URY", "VEN")
+emerging_meca <- c("AFG", "DZA", "ARM", "AZE", "BHR", "DJI", "EGY", "GEO", "IRN", "IRQ", "JOR", "KAZ", "KWT", "KGZ", "LBN", "LBY", "MRT", "MAR", "OMN", "PAK", "QAT", "SAU", "SOM", "SDN", "SYR", "TJK", "TUN", "TKM", "ARE", "UZB", "PSE", "YEM")
+emerging_ssafrica <- c("AGO", "BEN", "BWA", "BFA", "BDI", "CPV", "CMR", "CAF", "TCD", "COM", "COG", "COD", "CIV", "GNQ", "ERI", "SWZ", "ETH", "GAB", "GMB", "GHA", "GIN", "GNB", "KEN", "LSO", "LBR", "MDG", "MWI", "MLI", "MUS", "MOZ", "NAM", "NER", "NGA", "RWA", "STP", "SEN", "SYC", "SLE", "ZAF", "SSD", "TZA", "TGO", "UGA", "ZMB", "ZWE")
 
 #Add higher level groups
 emerging_economies <- c(emerging_asia, emerging_europe, emerging_latam, emerging_meca, emerging_ssafrica)
@@ -113,7 +59,7 @@ cpis_areas %>%
   filter(!(input_code %in% codelist$iso2c)) %>%
   print(n = nrow(.))
 
-##Create country set----
+##Create country list----
 country_set <- codelist %>%
   select(country.name.en, iso2c, iso3c, imf, continent, region) %>%
   mutate(iso2c = if_else(country.name.en == "Kosovo", "XK", iso2c), #Correct for Kosovo
@@ -146,16 +92,15 @@ country_set <- codelist %>%
                                       iso3c %in% emerging_meca ~ "Middle East and Central Asia",
                                       iso3c %in% emerging_ssafrica ~ "Sub-Saharan Africa",
                                       !iso3c %in% imf_weo_countries ~ "WEO Not-Monitored")) %>%
-  mutate(status = "current") %>%
   filter(iso2c %in% cdis_areas$input_code)
 
 #Remove intermeiate vectors
 rm(imf_weo_countries, advanced_economies, emerging_economies, emerging_asia, emerging_europe, emerging_latam, emerging_meca, emerging_ssafrica)
-#rm(cdis_areas, cpis_areas, dots_areas)
+rm(cdis_areas, cpis_areas, dots_areas)
 rm(dots_indicators, cdis_indicators, cpis_indicators)
 rm(codelist)
 
-##Former countries----
+##Former countries dataframe----
 former_countries <- tibble(country.name.en = c("Former Czechoslovakia", "East Germany", "Serbia and Montenegro", "Former U.S.S.R.", "Yemen Arab Rep.", "Yemen, P.D. Rep.", "Former Yugoslavia" ),
                            iso2c = c("CSH", "DE2", "CS", "SUH","1C_473", "1C_459", "YUC"),
                            iso3c = c("CSH", "DDD", "SCG", "SUN", "YAR", "YMD", "YUG"),
@@ -163,17 +108,16 @@ former_countries <- tibble(country.name.en = c("Former Czechoslovakia", "East Ge
                            continent = c("Europe", "Europe", "Europe", "Europe", "Asia", "Asia", "Europe"),
                            region = c("Europe and Central Asia", "Europe and Central Asia", "Europe and Central Asia", "Europe and Central Asia", "Middle East & North Africa", "Middle East & North Africa",  "Europe and Central Asia"),
                            weo_group_mayor = "Former Countries",
-                           weo_group_region = "Former Countries") %>% 
-  mutate(status = "former")
+                           weo_group_region = "Former Countries")
 
 ##Definitive country set-----
 country_set <- rbind(country_set, former_countries)
 rm(former_countries)
 
-# 1.0.1 Download GDP deflator for inflation adjustment----
+##1.0.1 Download GDP deflator for inflation adjustment
 
 #Set years for data import
-start_year <- 2000
+start_year <- 1977
 end_year <- 2022
 
 ##Import USD GDP deflator
@@ -189,33 +133,67 @@ usa_gdp_deflator <- imf_dataset(database_id = "IFS",
 
 ##1.1 DOTS Exports----
 
+#Bilateral Exports Dataset-------
+
 #Initialize empty dadaset for DOTS exports
 dots_exports_base <- tibble()
 
-##Set years to import data
-start_year <- 2000
-end_year <- 2020
+##Set years to import data----
+start_year <- 2020
+end_year <- 2022
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
 
 #Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>%
-  intersect(dots_areas$input_code)) #Only valid DOTS codes
-
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
 print(total_countries)
-
 progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
+
+#Vector to keep track of download and resume in case of interruption
+countries_leftout <- c("TW")
+
+###Download loop----
+for(i in c(country_set$iso2c)[! country_set$iso2c %in% countries_leftout]){
+  
+  dots <- imf_dataset(database_id = "DOT", 
+                      indicator = "TXG_FOB_USD", 
+                      ref_area = i, 
+                      freq = "A", 
+                      start = start_year,
+                      end = end_year,
+                      return_raw = TRUE) %>% filter(`@FREQ` == "A", `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>% #CHECK
+    mutate(Obs = map(Obs, as.data.frame)) %>% #CHECK
+    unnest(Obs) %>%  #CHECK
+    mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>% #Setting country names as characters 
+    replace_na(list(`@REF_AREA` = "NA")) #Normal Download 
+  
+  if ("X..TIME_PERIOD" %in% colnames(dots) | "X.OBS_VALUE" %in% colnames(dots)) { #If conditional to check if there are repeating columns with trade values
+    
+    col_combine_1 <- c("@TIME_PERIOD","X.TIME_PERIOD") #Names of the columns that will be combined (Time)
+    
+    col_combine_2 <- c("@OBS_VALUE" , "X.OBS_VALUE" ) #Names of the columns that will be combined (Trade values)
+    
+    dots <- cbind('@TIME_PERIOD' = na.omit(unlist(dots[,col_combine_1])),
+                  dots[,!colnames(dots) %in% col_combine_1, drop = FALSE])  #Combining the columns
+    
+    dots <- cbind('@OBS_VALUE' = na.omit(unlist(dots[,col_combine_2])),
+                  dots[,!colnames(dots) %in% col_combine_2, drop = FALSE]) #Combining the columns
+  }
+  
+  dots <- dots %>% mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), `@UNIT_MULT` = as.numeric(`@UNIT_MULT`)) %>% #Setting the trade values as numeric variables
+    mutate(`@OBS_VALUE_2` = `@OBS_VALUE`*10^(`@UNIT_MULT`)) %>% #Calculating trade values in normal dollars (not millions)
+    select(c(`@REF_AREA`,`@COUNTERPART_AREA`,`@TIME_PERIOD`,`@OBS_VALUE_2`)) #Selecting desired columns/data 
+  
+  
+  dots_exports_base <- rbind(dots_exports_base, dots) #Adding the downloaded data to the aggregate dataset
+  countries_leftout <- c(countries_leftout,i) #IDK
+  rm(dots) #Removing dots
+}
 
 ### Download loop
 for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
   country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
-
-  # Skip invalid countries dynamically
-  if (!(country_code %in% dots_areas$input_code)) {
-    warning(sprintf("Skipping invalid country: %s (not a valid DOTS area)", country_code))
-    next
-  }
   
   # Initialize 'dots' before the try block to ensure it exists
   dots <- tibble()
@@ -223,7 +201,7 @@ for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
   tryCatch({
     dots <- imf_dataset(database_id = "DOT", 
                         indicator = "TXG_FOB_USD",
-                        ref_area = country_code, 
+                        ref_area = country_set, 
                         freq = "A", 
                         start = start_year,
                         end = end_year,
@@ -233,8 +211,7 @@ for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
       mutate(Obs = map(Obs, as.data.frame)) %>%
       unnest(Obs) %>%
       mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
-      replace_na(list(`@REF_AREA` = "NA")) %>%
-      select(-matches("X.OBS_STATUS"), -matches("@OBS_STATUS"))  # Remove redundant columns
+      replace_na(list(`@REF_AREA` = "NA"))
     
     if ("X.TIME_PERIOD" %in% colnames(dots) | "X.OBS_VALUE" %in% colnames(dots)) {
       dots <- dots %>% 
@@ -247,11 +224,10 @@ for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
   })
   
   # Append the downloaded data to the aggregate dataset
-  if (!is.null(dots) && nrow(dots) > 0) {
+  if (nrow(dots) > 0) {
     dots_exports_base <- bind_rows(dots_exports_base, dots)
   }
   rm(dots)
-  
   # Update Progress Bar
   setTxtProgressBar(progress_bar, i)
 }
@@ -259,143 +235,11 @@ for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
 # Close Progress Bar
 close(progress_bar)
 
-#Edit base for processing
-dots_exports_base <- dots_exports_base %>% 
-  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
-         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
-         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
-
-#Change column names for ease of use
-dots_exports_base <- dots_exports_base %>%
-  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
-  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
-  rename(frequency = `@FREQ`,
-         indicator = `@INDICATOR`,
-         unit_mult = `@UNIT_MULT`,
-         jurisdiction_iso3 = iso3c.x,
-         jurisdiction_iso2 = `@REF_AREA`,
-         counterpart_iso3 = iso3c.y,
-         counterpart_iso2 = `@COUNTERPART_AREA`,
-         year = `@TIME_PERIOD`, 
-         flow = `@OBS_VALUE`,
-         flow_adj = `@OBS_VALUE_ADJUSTED`) %>%
-  filter(!(is.na(flow_adj)))
-
-#Inflationary adjustment and final filter
-dots_exports_base <- dots_exports_base %>%
-  mutate(year = as.numeric(year)) %>%
-  left_join(., usa_gdp_deflator, by = "year") %>%
-  mutate(flow_adj_cons = flow_adj/deflator*100) %>%
-  select(year, jurisdiction_iso2, counterpart_iso2, flow, flow_adj, flow_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
-  rename(indicator = `indicator.x`) %>%
-  filter(flow != 0) #Get rid of 0 values
-
-##1.2 DOTS Imports----
-
-#Initialize empty dadaset for DOTS imports
-dots_imports_base <- tibble()
-
-##Set years to import data
-start_year <- 2000
-end_year <- 2020
-
-#Initialize vector to keep track of which countries have been processed
-countries_leftout <- c()
-
-#Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>%
-                            intersect(dots_areas$input_code)) #Only valid DOTS codes
-
-print(total_countries)
-
-progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
-
-### Download loop
-for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
-  country_code <- setdiff(country_set$iso2c, countries_leftout)[i]
-  
-  # Skip invalid countries dynamically
-  if (!(country_code %in% dots_areas$input_code)) {
-    warning(sprintf("Skipping invalid country: %s (not a valid DOTS area)", country_code))
-    next
-  }
-  
-  # Initialize 'dots' before the try block to ensure it exists
-  dots <- tibble()
-  
-  tryCatch({
-    dots <- imf_dataset(database_id = "DOT", 
-                        indicator = "TMG_CIF_USD",
-                        ref_area = country_code, 
-                        freq = "A", 
-                        start = start_year,
-                        end = end_year,
-                        return_raw = TRUE) %>% 
-      filter(`@FREQ` == "A",
-             `@COUNTERPART_AREA` %in% c(country_set$iso2c)) %>%
-      mutate(Obs = map(Obs, as.data.frame)) %>%
-      unnest(Obs) %>%
-      mutate(`@REF_AREA` = as.character(`@REF_AREA`)) %>%
-      replace_na(list(`@REF_AREA` = "NA")) %>%
-      select(-matches("X.OBS_STATUS"), -matches("@OBS_STATUS"))  # Remove redundant columns
-    
-    if ("X.TIME_PERIOD" %in% colnames(dots) | "X.OBS_VALUE" %in% colnames(dots)) {
-      dots <- dots %>% 
-        unite("@TIME_PERIOD", c("@TIME_PERIOD", "X.TIME_PERIOD"), na.rm = TRUE) %>%
-        unite("@OBS_VALUE", c("@OBS_VALUE", "X.OBS_VALUE"), na.rm = TRUE)
-    }
-    
-  }, error = function(e) {
-    warning(sprintf("Failed to retrieve data for country: %s. Error: %s", country_code, e$message))
-  })
-  
-  # Append the downloaded data to the aggregate dataset
-  if (!is.null(dots) && nrow(dots) > 0) {
-    dots_imports_base <- bind_rows(dots_imports_base, dots)
-  }
-  rm(dots)
-  
-  # Update Progress Bar
-  setTxtProgressBar(progress_bar, i)
-}
-
-# Close Progress Bar
-close(progress_bar)
-
-#Edit base for processing
-dots_imports_base <- dots_imports_base %>% 
-  mutate(`@OBS_VALUE` = as.numeric(`@OBS_VALUE`), 
-         `@UNIT_MULT` = as.numeric(`@UNIT_MULT`),
-         `@OBS_VALUE_ADJUSTED` = `@OBS_VALUE` * 10^(`@UNIT_MULT`))
-
-#Change column names for ease of use
-dots_imports_base <- dots_imports_base %>%
-  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@REF_AREA` = "iso2c")) %>%
-  left_join(country_set[, c("iso2c", "iso3c")], by = c(`@COUNTERPART_AREA` = "iso2c")) %>%
-  rename(frequency = `@FREQ`,
-         indicator = `@INDICATOR`,
-         unit_mult = `@UNIT_MULT`,
-         jurisdiction_iso3 = iso3c.x,
-         jurisdiction_iso2 = `@REF_AREA`,
-         counterpart_iso3 = iso3c.y,
-         counterpart_iso2 = `@COUNTERPART_AREA`,
-         year = `@TIME_PERIOD`, 
-         flow = `@OBS_VALUE`,
-         flow_adj = `@OBS_VALUE_ADJUSTED`) %>%
-  filter(!(is.na(flow_adj)))
-
-#Inflationary adjustment and final filter
-dots_imports_base <- dots_imports_base %>%
-  mutate(year = as.numeric(year)) %>%
-  left_join(., usa_gdp_deflator, by = "year") %>%
-  mutate(flow_adj_cons = flow_adj/deflator*100) %>%
-  select(year, jurisdiction_iso2, counterpart_iso2, flow, flow_adj, flow_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
-  rename(indicator = `indicator.x`) %>%
-  filter(flow != 0) #Get rid of 0 values
+##1.2 DOTS Exports----
 
 ##1.3 CDIS Inward-----
 
-#Initialize empty dadatsets for CDIS Inward
+#Initialize empy dadatsets for CDIS Inward
 cdis_inward_base <- tibble()
 
 #Set years for data import
@@ -406,9 +250,7 @@ end_year <- 2022
 countries_leftout <- c()
 
 #Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>% 
-                            intersect(cdis_areas$input_code))
-
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
 print(total_countries)
 progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
 
@@ -479,7 +321,7 @@ cdis_inward_base <- cdis_inward_base %>%
          obs_status = `@OBS_STATUS`) %>%
   filter(!(is.na(position_adj) & is.na(obs_status)))
 
-#Check how many confidential registries are
+#Check how many confidentail registries are
 sum(cdis_inward_base$obs_status == "C", na.rm = TRUE)
 
 #Negative registries
@@ -497,7 +339,7 @@ cdis_inward_base <- cdis_inward_base %>%
   mutate(position_adj_cons = position_adj/deflator*100) %>%
   select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
   rename(indicator = `indicator.x`) %>%
-  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving confidential
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
 
 ##1.4 CDIS Outward ------
 
@@ -512,8 +354,7 @@ end_year <- 2022
 countries_leftout <- c()
 
 #Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>%
-                            intersect(cdis_areas$input_code))
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
 print(total_countries)
 progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
 
@@ -617,11 +458,8 @@ end_year <- 2022
 countries_leftout <- c()
 
 #Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>%
-                            intersect(cpis_areas$input_code))
-
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
 print(total_countries)
-
 progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
 
 ### Download loop
@@ -737,11 +575,8 @@ end_year <- 2022
 countries_leftout <- c()
 
 #Prepare progress bar for download
-total_countries <- length(setdiff(country_set$iso2c, countries_leftout) %>%
-                            intersect(cpis_areas$input_code))
-                            
+total_countries <- length(setdiff(country_set$iso2c, countries_leftout))
 print(total_countries)
-
 progress_bar <- txtProgressBar(min = 0, max = total_countries, style = 3)
 
 ### Download loop
@@ -994,6 +829,7 @@ sum(lbs_liabilities_base$position < 0, na.rm = TRUE)
 rm(lbs_base, lbs_base_filtered)
 rm(progress_bar)
 
+
 #1.8 Find common countries and generate summaries-----
 
 # Define the function to extract unique countries by year from a dataset, considering both jurisdiction and counterpart ISO3 codes
@@ -1043,8 +879,6 @@ generate_summary <- function(data, confidential_col = NULL) {
 
 # Load datasets (ensure they are available in the environment)
 datasets <- list(
-  `DOTS Exports` = dots_exports_base,
-  `DOTS Imports` = dots_imports_base,
   `CDIS Inward` = cdis_inward_base,
   `CDIS Outward` = cdis_outward_base,
   `CPIS Assets` = cpis_assets_base,
