@@ -10,6 +10,10 @@ library(devtools)
 if (!requireNamespace("imfr", quietly = TRUE)) install_github("christophergandrud/imfr")
 library(imfr)
 
+#For API downloads
+if (!requireNamespace("rsdmx", quietly = TRUE)) install.packages("rsdmx")
+library(rsdmx)
+
 # Function to check and load packages
 load_packages <- function(packages) {
   for (pkg in packages) {
@@ -30,6 +34,7 @@ packages <- c("tidyverse", "BISdata", "countrycode", "pbapply", "purrr", "moment
 # Load all packages
 load_packages(packages)
 rm(packages)
+rm(load_packages)
 
 # Set the path to import/save files based on the script’s directory
 if (requireNamespace("rstudioapi", quietly = TRUE)) {

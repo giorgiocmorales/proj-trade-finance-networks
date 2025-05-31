@@ -57,7 +57,7 @@ emerging_asia <- c(
   "KIR", "MHL", "FSM", "NRU", "PLW", "PNG", "WSM", "SLV", "TLS", "TON", "TUV", "VUT"
 )
 
-# Emerging Europe by Country
+# Europe (Emerging)
 emerging_europe <- c(
   "ALB", "BLR", "BIH", "BGR", "HRV", "HUN", "XKX", "MDA", "MNE", "MKD", 
   "POL", "ROU", "RUS", "SRB", "TUR", "UKR"
@@ -149,7 +149,7 @@ country_set <- codelist %>%
   mutate(status = "current") %>%
   filter(iso2c %in% cdis_areas$input_code)
 
-#Remove intermeiate vectors
+#Remove intermediate vectors
 rm(imf_weo_countries, advanced_economies, emerging_economies, emerging_asia, emerging_europe, emerging_latam, emerging_meca, emerging_ssafrica)
 #rm(cdis_areas, cpis_areas, dots_areas)
 rm(dots_indicators, cdis_indicators, cpis_indicators)
@@ -170,11 +170,12 @@ former_countries <- tibble(country.name.en = c("Former Czechoslovakia", "East Ge
 country_set <- rbind(country_set, former_countries)
 rm(former_countries)
 
-# 1.0.1 Download GDP deflator for inflation adjustment----
+# Download Data----
+## 1.0.1 Download GDP deflator for inflation adjustment----
 
 #Set years for data import
-start_year <- 2000
-end_year <- 2022
+start_year <-1977
+end_year <- 2023
 
 ##Import USD GDP deflator
 usa_gdp_deflator <- imf_dataset(database_id = "IFS",
@@ -189,12 +190,12 @@ usa_gdp_deflator <- imf_dataset(database_id = "IFS",
 
 ##1.1 DOTS Exports----
 
-#Initialize empty dadaset for DOTS exports
+#Initialize empty dataset for DOTS exports
 dots_exports_base <- tibble()
 
 ##Set years to import data
-start_year <- 2000
-end_year <- 2020
+start_year <- 1990
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -292,12 +293,12 @@ dots_exports_base <- dots_exports_base %>%
 
 ##1.2 DOTS Imports----
 
-#Initialize empty dadaset for DOTS imports
+#Initialize empty dataset for DOTS imports
 dots_imports_base <- tibble()
 
 ##Set years to import data
-start_year <- 2000
-end_year <- 2020
+start_year <- 1990
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -395,12 +396,12 @@ dots_imports_base <- dots_imports_base %>%
 
 ##1.3 CDIS Inward-----
 
-#Initialize empty dadatsets for CDIS Inward
+#Initialize empty dataset for CDIS Inward
 cdis_inward_base <- tibble()
 
 #Set years for data import
 start_year <- 2009
-end_year <- 2022
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -501,12 +502,12 @@ cdis_inward_base <- cdis_inward_base %>%
 
 ##1.4 CDIS Outward ------
 
-#Initialize empty dadatset for CDIS Outward
+#Initialize empty dataset for CDIS Outward
 cdis_outward_base <- tibble()
 
 #Set years for data import
 start_year <- 2009
-end_year <- 2022
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -553,7 +554,7 @@ for (i in seq_along(setdiff(country_set$iso2c, countries_leftout))) {
   if (nrow(cdis) > 0) {
     cdis_outward_base <- bind_rows(cdis_outward_base, cdis)
   }
-  
+  rm(cdis)
   # Update Progress Bar
   setTxtProgressBar(progress_bar, i)
 }
@@ -602,16 +603,16 @@ cdis_outward_base <- cdis_outward_base %>%
   mutate(position_adj_cons = position_adj/deflator*100) %>%
   select(year, jurisdiction_iso2, counterpart_iso2, obs_status, position, position_adj, position_adj_cons, jurisdiction_iso3, counterpart_iso3, `indicator.x`) %>%
   rename(indicator = `indicator.x`) %>% 
-  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
+  filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving confidential
 
 ##1.5 CPIS Assets -----
 
-#Initialize empy dadatsets for CPIS Assets
+#Initialize empty dataset for CPIS Assets
 cpis_assets_base <- tibble()
 
 #Set years for data import
 start_year <- 2001
-end_year <- 2022
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -725,13 +726,13 @@ cpis_assets_base <- cpis_assets_base %>%
   rename(indicator = `indicator.x`) %>%
   filter(position != 0 | obs_status == "C") #Get rid of 0 values while preserving conficential
 
-##1.6 CPIS liabilities-----
+##1.6 CPIS Liabilities-----
 
-#Initialize empy dadatsets for CPIS
+#Initialize empty datasets for CPIS
 cpis_liabilities_base <- tibble()
 
 start_year <- 2001
-end_year <- 2022
+end_year <- 2023
 
 #Initialize vector to keep track of which countries have been processed
 countries_leftout <- c()
@@ -849,7 +850,10 @@ sum(cpis_liabilities_base$position == 0, na.rm = TRUE)/length(cpis_liabilities_b
 
 ##1.7 BIS LBS -----
 
-#Doqwnload Locational Banking Statistics
+# Set timeout to 10 minutes for large files
+options(timeout = 600)
+
+#Download Locational Banking Statistics
 lbs_base <- fetch_dataset(dest.dir = tempdir(),
                           bis.url = "https://data.bis.org/static/bulk/",
                           dataset = "WS_LBS_D_PUB_csv_col.zip",
@@ -861,6 +865,7 @@ lbs_base <- fetch_dataset(dest.dir = tempdir(),
                           na.strings = "",
                           quote = "\"",
                           fill = TRUE)
+#Arrange database
 
 #Tibble of parent country
 lbs_parent_country <- lbs_base %>%
@@ -940,7 +945,7 @@ lbs_base_filtered <- lbs_base_filtered %>%
   filter(quarter == "Q4", #Filter to retain only entries from the fourth quarter
          year <= end_year) #Filter to only get data up until final year
 
-#Count Nas
+#Count NAs
 sum(lbs_base_filtered$position == "NaN", na.rm = TRUE)
 sum(is.na(lbs_base_filtered$position))
 
@@ -992,9 +997,119 @@ sum(lbs_liabilities_base$position < 0, na.rm = TRUE)
 
 #Remove redundant bases
 rm(lbs_base, lbs_base_filtered)
-rm(progress_bar)
 
-#1.8 Find common countries and generate summaries-----
+#1.8 Join all data sets----
+
+# Standardize and merge datasets
+dataset_base <- bind_rows(
+  dots_exports_base %>%
+    mutate(source = "DOTS Exports", 
+           value = flow, 
+           value_adj = flow_adj,
+           value_adj_cons = flow_adj_cons,
+           value_type = "flow",
+           obs_status = NA_character_),  # Add obs_status as NA
+  
+  dots_imports_base %>%
+    mutate(source = "DOTS Imports", 
+           value = flow, 
+           value_adj = flow_adj,
+           value_adj_cons = flow_adj_cons,
+           value_type = "flow",
+           obs_status = NA_character_),  # Add obs_status as NA
+  
+  cdis_inward_base %>%
+    mutate(source = "CDIS Inward", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position"),  # Keep obs_status (already exists)
+  
+  cdis_outward_base %>%
+    mutate(source = "CDIS Outward", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position"),  # Keep obs_status (already exists)
+  
+  cpis_assets_base %>%
+    mutate(source = "CPIS Assets", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position"),  # Keep obs_status (already exists)
+  
+  cpis_liabilities_base %>%
+    mutate(source = "CPIS Liabilities", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position"),  # Keep obs_status (already exists)
+  
+  lbs_claims_base %>%
+    mutate(source = "LBS Claims", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position",
+           obs_status = NA_character_),  # Add obs_status as NA
+  
+  lbs_liabilities_base %>%
+    mutate(source = "LBS Liabilities", 
+           value = position, 
+           value_adj = position_adj,
+           value_adj_cons = position_adj_cons,
+           value_type = "position",
+           obs_status = NA_character_)  # Add obs_status as NA
+) %>%
+  select(year, jurisdiction_iso3, counterpart_iso3, value, value_adj, value_adj_cons, obs_status,
+         value_type, indicator, source)  # Ensure correct column order
+
+##1.8.1 Save merged dataset--------
+
+# Define data directory
+data_dir <- file.path(system("git rev-parse --show-toplevel", intern = TRUE), "data")
+
+#Create CSV and savefile
+write.csv(dataset_base, file.path(data_dir, "trade_finance_network_data.csv"), row.names = FALSE, fileEncoding = "UTF-8", na = "")
+
+## Save additional datasets for further use
+write.csv(country_set, file.path(data_dir, "country_set.csv"), row.names = FALSE, fileEncoding = "UTF-8", na = "")
+
+#Save environment
+save.image(file = file.path(data_dir, "session_backup.RData"))
+
+#1.9 Generate summary statistics ------
+
+summary_by_source <- dataset_base %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj_cons / 1000, na.rm = TRUE),
+    Max = max(value_adj_cons / 1000, na.rm = TRUE),
+    Mean = mean(value_adj_cons / 1000, na.rm = TRUE),
+    Median = median(value_adj_cons / 1000, na.rm = TRUE),
+    `Std Dev` = sd(value_adj_cons / 1000, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+summary_by_source
+
+# 1.10 Common countries per year by source  -------
+
+# Countries by year
+countries_by_year <-
+  dataset_base %>%
+    select(year, jurisdiction_iso3, counterpart_iso3, source) %>%
+    pivot_longer(cols = c(jurisdiction_iso3, counterpart_iso3), names_to = "type", values_to = "country_iso3") %>%
+    distinct(year, country_iso3, source) %>%
+    group_by(year, source) %>%
+    summarize(countries = list(unique(country_iso3)), .groups = 'drop')
+
+#1.10 Find common countries and generate summaries-----
 
 # Define the function to extract unique countries by year from a dataset, considering both jurisdiction and counterpart ISO3 codes
 extract_countries_by_year <- function(data) {
@@ -1078,18 +1193,3 @@ summary_assets <- list(
 )
 
 summary_table_assets <- bind_rows(summary_assets, .id = "Dataset")
-
-##1.8 Keep only outward datasets
-
-#1.9 Join data sets----
-
-# Add a new column indicating the dataset source
-cdis_outward_filtered <- cdis_outward_filtered %>% mutate(source = "CDIS Outward")
-cpis_assets_filtered <- cpis_assets_filtered %>% mutate(source = "CPIS Assets")
-lbs_claims_filtered <- lbs_claims_filtered %>% mutate(source = "LBS Claims")
-
-# Combine the datasets
-combined_assets_base <- bind_rows(cdis_outward_filtered, cpis_assets_filtered, lbs_claims_filtered)
-
-# Display the combined dataset
-head(combined_assets_base)
