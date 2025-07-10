@@ -1,253 +1,260 @@
-"country.name.en","iso2c","iso3c","imf","continent","region","weo_group_mayor","weo_group_region","status"
-"Afghanistan","AF","AFG","512","Asia","South Asia","Emerging Economies","Middle East and Central Asia","current"
-"Albania","AL","ALB","914","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Algeria","DZ","DZA","612","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"American Samoa","AS","ASM","859","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Andorra","AD","AND",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Angola","AO","AGO","614","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Anguilla","AI","AIA","312","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Antigua & Barbuda","AG","ATG","311","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Argentina","AR","ARG","213","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Armenia","AM","ARM","911","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Aruba","AW","ABW","314","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Australia","AU","AUS","193","Oceania","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Austria","AT","AUT","122","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Azerbaijan","AZ","AZE","912","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Bahamas","BS","BHS","313","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Bahrain","BH","BHR","419","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Bangladesh","BD","BGD","513","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"Barbados","BB","BRB","316","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Belarus","BY","BLR","913","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Belgium","BE","BEL","124","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Belize","BZ","BLZ","339","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Benin","BJ","BEN","638","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Bermuda","BM","BMU","319","Americas","North America","WEO Not-Monitored","WEO Not-Monitored","current"
-"Bhutan","BT","BTN","514","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"Bolivia","BO","BOL","218","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Bosnia & Herzegovina","BA","BIH","963","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Botswana","BW","BWA","616","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Bouvet Island","BV","BVT",,"Antartica","Antartica","WEO Not-Monitored","WEO Not-Monitored","current"
-"Brazil","BR","BRA","223","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"British Indian Ocean Territory","IO","IOT",,"Asia","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"British Virgin Islands","VG","VGB",,"Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Brunei","BN","BRN","516","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Bulgaria","BG","BGR","918","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Burkina Faso","BF","BFA","748","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Burundi","BI","BDI","618","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Cambodia","KH","KHM","522","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Cameroon","CM","CMR","622","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Canada","CA","CAN","156","Americas","North America","Advanced Economies","Advanced Economies","current"
-"Cape Verde","CV","CPV","624","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Caribbean Netherlands","BQ","BES",,"Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Cayman Islands","KY","CYM","377","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Central African Republic","CF","CAF","626","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Chad","TD","TCD","628","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Chile","CL","CHL","228","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"China","CN","CHN","924","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Christmas Island","CX","CXR",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Cocos (Keeling) Islands","CC","CCK",,,"East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Colombia","CO","COL","233","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Comoros","KM","COM","632","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Congo - Brazzaville","CG","COG","634","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Congo - Kinshasa","CD","COD","636","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Cook Islands","CK","COK","815","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Costa Rica","CR","CRI","238","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Croatia","HR","HRV","960","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Cuba","CU","CUB","928","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Curacao & St. Maarten","1C_355","CUW","355","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Cyprus","CY","CYP","423","Asia","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Czechia","CZ","CZE","935","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Côte d’Ivoire","CI","CIV","662","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Denmark","DK","DNK","128","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Djibouti","DJ","DJI","611","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Dominica","DM","DMA","321","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Dominican Republic","DO","DOM","243","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Ecuador","EC","ECU","248","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Egypt","EG","EGY","469","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"El Salvador","SV","SLV","253","Americas","Latin America & Caribbean","Emerging Economies","Emerging and Developing Asia","current"
-"Equatorial Guinea","GQ","GNQ","642","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Eritrea","ER","ERI","643","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Estonia","EE","EST","939","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Eswatini","SZ","SWZ","734","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Ethiopia","ET","ETH","644","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Falkland Islands","FK","FLK","323","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Faroe Islands","FO","FRO","816","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Fiji","FJ","FJI","819","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Finland","FI","FIN","172","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"France","FR","FRA","132","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"French Guiana","GF","GUF","333","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"French Polynesia","PF","PYF","887","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"French Southern Territories","TF","ATF",,"Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored","current"
-"Gabon","GA","GAB","646","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Gambia","GM","GMB","648","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Georgia","GE","GEO","915","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Germany","DE","DEU","134","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Ghana","GH","GHA","652","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Gibraltar","GI","GIB","823","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Greece","GR","GRC","174","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Greenland","GL","GRL","326","Americas","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Grenada","GD","GRD","328","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Guadeloupe","GP","GLP","329","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Guam","GU","GUM","829","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Guatemala","GT","GTM","258","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Guernsey","GG","GGY",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Guinea","GN","GIN","656","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Guinea-Bissau","GW","GNB","654","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Guyana","GY","GUY","336","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Haiti","HT","HTI","263","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Heard & McDonald Islands","HM","HMD",,,"East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Honduras","HN","HND","268","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Hong Kong SAR China","HK","HKG","532","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Hungary","HU","HUN","944","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Iceland","IS","ISL","176","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"India","IN","IND","534","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"Indonesia","ID","IDN","536","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Iran","IR","IRN","429","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Iraq","IQ","IRQ","433","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Ireland","IE","IRL","178","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Isle of Man","IM","IMN",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Israel","IL","ISR","436","Asia","Middle East & North Africa","Advanced Economies","Advanced Economies","current"
-"Italy","IT","ITA","136","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Jamaica","JM","JAM","343","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Japan","JP","JPN","158","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Jersey","JE","JEY",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Jordan","JO","JOR","439","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Kazakhstan","KZ","KAZ","916","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Kenya","KE","KEN","664","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Kiribati","KI","KIR","826","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Kosovo","XK","XKX","967","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Kuwait","KW","KWT","443","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Kyrgyzstan","KG","KGZ","917","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Laos","LA","LAO","544","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Latvia","LV","LVA","941","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Lebanon","LB","LBN","446","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Lesotho","LS","LSO","666","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Liberia","LR","LBR","668","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Libya","LY","LBY","672","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Liechtenstein","LI","LIE",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Lithuania","LT","LTU","946","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Luxembourg","LU","LUX","137","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Macao SAR China","MO","MAC","546","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Madagascar","MG","MDG","674","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Malawi","MW","MWI","676","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Malaysia","MY","MYS","548","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Maldives","MV","MDV","556","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"Mali","ML","MLI","678","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Malta","MT","MLT","181","Europe","Middle East & North Africa","Advanced Economies","Advanced Economies","current"
-"Marshall Islands","MH","MHL","867","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Martinique","MQ","MTQ","349","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Mauritania","MR","MRT","682","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia","current"
-"Mauritius","MU","MUS","684","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Mayotte","YT","MYT",,"Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored","current"
-"Mexico","MX","MEX","273","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Micronesia (Federated States of)","FM","FSM","868","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Moldova","MD","MDA","921","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Monaco","MC","MCO",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Mongolia","MN","MNG","948","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Montenegro","ME","MNE","943","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Montserrat","MS","MSR","351","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Morocco","MA","MAR","686","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Mozambique","MZ","MOZ","688","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Myanmar (Burma)","MM","MMR","518","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Namibia","NA","NAM","728","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Nauru","NR","NRU","836","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Nepal","NP","NPL","558","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"Netherlands","NL","NLD","138","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Netherlands Antilles","AN","ANT","353","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"New Caledonia","NC","NCL","839","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"New Zealand","NZ","NZL","196","Oceania","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Nicaragua","NI","NIC","278","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Niger","NE","NER","692","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Nigeria","NG","NGA","694","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Niue","NU","NIU",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Norfolk Island","NF","NFK",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"North Korea","KP","PRK",,"Asia","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"North Macedonia","MK","MKD","962","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Northern Mariana Islands","MP","MNP",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Norway","NO","NOR","142","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Oman","OM","OMN","449","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Pakistan","PK","PAK","564","Asia","South Asia","Emerging Economies","Middle East and Central Asia","current"
-"Palau","PW","PLW","565","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Palestinian Territories","PS","PSE","487","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Panama","PA","PAN","283","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Papua New Guinea","PG","PNG","853","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Paraguay","PY","PRY","288","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Peru","PE","PER","293","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Philippines","PH","PHL","566","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Pitcairn Islands","PN","PCN",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Poland","PL","POL","964","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Portugal","PT","PRT","182","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Puerto Rico","PR","PRI",,"Americas","Latin America & Caribbean","Advanced Economies","Advanced Economies","current"
-"Qatar","QA","QAT","453","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Romania","RO","ROU","968","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Russia","RU","RUS","922","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Rwanda","RW","RWA","714","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Réunion","RE","REU","696","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored","current"
-"Samoa","WS","WSM","862","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"San Marino","SM","SMR","135","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Saudi Arabia","SA","SAU","456","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Senegal","SN","SEN","722","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Serbia","RS","SRB","942","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Seychelles","SC","SYC","718","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Sierra Leone","SL","SLE","724","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Singapore","SG","SGP","576","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Sint Maarten","SX","SXM",,"Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Slovakia","SK","SVK","936","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Slovenia","SI","SVN","961","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Solomon Islands","SB","SLB","813","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Somalia","SO","SOM","726","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia","current"
-"South Africa","ZA","ZAF","199","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"South Georgia & South Sandwich Islands","GS","SGS",,,"East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"South Korea","KR","KOR","542","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"South Sudan","SS","SSD","733","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Spain","ES","ESP","184","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Sri Lanka","LK","LKA","524","Asia","South Asia","Emerging Economies","Emerging and Developing Asia","current"
-"St. Helena","SH","SHN","856","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored","current"
-"St. Kitts & Nevis","KN","KNA","361","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"St. Lucia","LC","LCA","362","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"St. Pierre & Miquelon","PM","SPM","363","Americas","North America","WEO Not-Monitored","WEO Not-Monitored","current"
-"St. Vincent & Grenadines","VC","VCT","364","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Sudan","SD","SDN","732","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia","current"
-"Suriname","SR","SUR","366","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Sweden","SE","SWE","144","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Switzerland","CH","CHE","146","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"Syria","SY","SYR","463","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"São Tomé & Príncipe","ST","STP","716","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Taiwan","TW","TWN","528","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies","current"
-"Tajikistan","TJ","TJK","923","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Tanzania","TZ","TZA","738","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Thailand","TH","THA","578","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Timor-Leste","TL","TLS","537","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Togo","TG","TGO","742","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Tokelau","TK","TKL",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Tonga","TO","TON","866","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Trinidad & Tobago","TT","TTO","369","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Tunisia","TN","TUN","744","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Turkey","TR","TUR","186","Asia","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"Turkmenistan","TM","TKM","925","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Turks & Caicos Islands","TC","TCA",,"Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Tuvalu","TV","TUV",,"Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"U.S. Virgin Islands","VI","VIR",,"Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored","current"
-"Uganda","UG","UGA","746","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Ukraine","UA","UKR","926","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe","current"
-"United Arab Emirates","AE","ARE","466","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"United Kingdom","GB","GBR","112","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies","current"
-"United States","US","USA","111","Americas","North America","Advanced Economies","Advanced Economies","current"
-"Uruguay","UY","URY","298","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Uzbekistan","UZ","UZB","927","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia","current"
-"Vanuatu","VU","VUT","846","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Vatican City","VA","VAT",,"Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored","current"
-"Venezuela","VE","VEN","299","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean","current"
-"Vietnam","VN","VNM","582","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia","current"
-"Wallis & Futuna","WF","WLF",,"Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored","current"
-"Western Sahara","EH","ESH",,"Africa","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored","current"
-"Yemen","YE","YEM","474","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia","current"
-"Zambia","ZM","ZMB","754","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Zimbabwe","ZW","ZWE","698","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa","current"
-"Former Czechoslovakia","CSH","CSH","200","Europe","Europe and Central Asia","Former Countries","Former Countries","former"
-"East Germany","DE2","DDD","278","Europe","Europe and Central Asia","Former Countries","Former Countries","former"
-"Serbia and Montenegro","CS","SCG","891","Europe","Europe and Central Asia","Former Countries","Former Countries","former"
-"Former U.S.S.R.","SUH","SUN","810","Europe","Europe and Central Asia","Former Countries","Former Countries","former"
-"Yemen Arab Rep.","1C_473","YAR","NA","Asia","Middle East & North Africa","Former Countries","Former Countries","former"
-"Yemen, P.D. Rep.","1C_459","YMD","720","Asia","Middle East & North Africa","Former Countries","Former Countries","former"
-"Former Yugoslavia","YUC","YUG","891","Europe","Europe and Central Asia","Former Countries","Former Countries","former"
+"country.name.en","iso2c","iso3c","imf","sdmx_code","continent","region","weo_group_major","weo_group_region","IMTS","DIP","PIP","WEO"
+"Afghanistan","AF","AFG",512,"AFG","Asia","South Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Albania","AL","ALB",914,"ALB","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Algeria","DZ","DZA",612,"DZA","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"American Samoa","AS","ASM",859,"ASM","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Andorra","AD","AND",,"AND","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Angola","AO","AGO",614,"AGO","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Anguilla","AI","AIA",312,"AIA","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Antigua & Barbuda","AG","ATG",311,"ATG","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Argentina","AR","ARG",213,"ARG","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Armenia","AM","ARM",911,"ARM","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Aruba","AW","ABW",314,"ABW","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Australia","AU","AUS",193,"AUS","Oceania","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Austria","AT","AUT",122,"AUT","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Azerbaijan","AZ","AZE",912,"AZE","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Bahamas","BS","BHS",313,"BHS","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Bahrain","BH","BHR",419,"BHR","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Bangladesh","BD","BGD",513,"BGD","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Barbados","BB","BRB",316,"BRB","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Belarus","BY","BLR",913,"BLR","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Belgium","BE","BEL",124,"BEL","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Belize","BZ","BLZ",339,"BLZ","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Benin","BJ","BEN",638,"BEN","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Bermuda","BM","BMU",319,"BMU","Americas","North America","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Bhutan","BT","BTN",514,"BTN","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Bolivia","BO","BOL",218,"BOL","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Bosnia & Herzegovina","BA","BIH",963,"BIH","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Botswana","BW","BWA",616,"BWA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Brazil","BR","BRA",223,"BRA","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"British Virgin Islands","VG","VGB",,"VGB","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Brunei","BN","BRN",516,"BRN","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Bulgaria","BG","BGR",918,"BGR","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Burkina Faso","BF","BFA",748,"BFA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Burundi","BI","BDI",618,"BDI","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Cambodia","KH","KHM",522,"KHM","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Cameroon","CM","CMR",622,"CMR","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Canada","CA","CAN",156,"CAN","Americas","North America","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Cape Verde","CV","CPV",624,"CPV","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Caribbean Netherlands","BQ","BES",,"BES","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Cayman Islands","KY","CYM",377,"CYM","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Central African Republic","CF","CAF",626,"CAF","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Chad","TD","TCD",628,"TCD","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Chile","CL","CHL",228,"CHL","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"China","CN","CHN",924,"CHN","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Colombia","CO","COL",233,"COL","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Comoros","KM","COM",632,"COM","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Congo - Brazzaville","CG","COG",634,"COG","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Congo - Kinshasa","CD","COD",636,"COD","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Cook Islands","CK","COK",815,"COK","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Costa Rica","CR","CRI",238,"CRI","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Croatia","HR","HRV",960,"HRV","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Cuba","CU","CUB",928,"CUB","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Curaçao","CW","CUW",354,"CUW","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Cyprus","CY","CYP",423,"CYP","Asia","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Czechia","CZ","CZE",935,"CZE","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Côte d’Ivoire","CI","CIV",662,"CIV","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Denmark","DK","DNK",128,"DNK","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Djibouti","DJ","DJI",611,"DJI","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Dominica","DM","DMA",321,"DMA","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Dominican Republic","DO","DOM",243,"DOM","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Ecuador","EC","ECU",248,"ECU","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Egypt","EG","EGY",469,"EGY","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"El Salvador","SV","SLV",253,"SLV","Americas","Latin America & Caribbean","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Equatorial Guinea","GQ","GNQ",642,"GNQ","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Eritrea","ER","ERI",643,"ERI","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Estonia","EE","EST",939,"EST","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Eswatini","SZ","SWZ",734,"SWZ","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Ethiopia","ET","ETH",644,"ETH","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Falkland Islands","FK","FLK",323,"FLK","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Faroe Islands","FO","FRO",816,"FRO","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Fiji","FJ","FJI",819,"FJI","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Finland","FI","FIN",172,"FIN","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"France","FR","FRA",132,"FRA","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"French Guiana","GF","GUF",333,"GUF","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"French Polynesia","PF","PYF",887,"PYF","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Gabon","GA","GAB",646,"GAB","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Gambia","GM","GMB",648,"GMB","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Georgia","GE","GEO",915,"GEO","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Germany","DE","DEU",134,"DEU","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Ghana","GH","GHA",652,"GHA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Gibraltar","GI","GIB",823,"GIB","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Greece","GR","GRC",174,"GRC","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Greenland","GL","GRL",326,"GRL","Americas","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Grenada","GD","GRD",328,"GRD","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Guadeloupe","GP","GLP",329,"GLP","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Guam","GU","GUM",829,"GUM","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Guatemala","GT","GTM",258,"GTM","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Guernsey","GG","GGY",,"GGY","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Guinea","GN","GIN",656,"GIN","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Guinea-Bissau","GW","GNB",654,"GNB","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Guyana","GY","GUY",336,"GUY","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Haiti","HT","HTI",263,"HTI","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Honduras","HN","HND",268,"HND","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Hong Kong SAR China","HK","HKG",532,"HKG","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Hungary","HU","HUN",944,"HUN","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Iceland","IS","ISL",176,"ISL","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"India","IN","IND",534,"IND","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Indonesia","ID","IDN",536,"IDN","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Iran","IR","IRN",429,"IRN","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Iraq","IQ","IRQ",433,"IRQ","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Ireland","IE","IRL",178,"IRL","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Isle of Man","IM","IMN",,"IMN","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Israel","IL","ISR",436,"ISR","Asia","Middle East & North Africa","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Italy","IT","ITA",136,"ITA","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Jamaica","JM","JAM",343,"JAM","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Japan","JP","JPN",158,"JPN","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Jordan","JO","JOR",439,"JOR","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Kazakhstan","KZ","KAZ",916,"KAZ","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Kenya","KE","KEN",664,"KEN","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Kiribati","KI","KIR",826,"KIR","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Kuwait","KW","KWT",443,"KWT","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Kyrgyzstan","KG","KGZ",917,"KGZ","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Laos","LA","LAO",544,"LAO","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Latvia","LV","LVA",941,"LVA","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Lebanon","LB","LBN",446,"LBN","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Lesotho","LS","LSO",666,"LSO","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Liberia","LR","LBR",668,"LBR","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Libya","LY","LBY",672,"LBY","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Liechtenstein","LI","LIE",,"LIE","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Lithuania","LT","LTU",946,"LTU","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Luxembourg","LU","LUX",137,"LUX","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Macao SAR China","MO","MAC",546,"MAC","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Madagascar","MG","MDG",674,"MDG","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Malawi","MW","MWI",676,"MWI","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Malaysia","MY","MYS",548,"MYS","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Maldives","MV","MDV",556,"MDV","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Mali","ML","MLI",678,"MLI","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Malta","MT","MLT",181,"MLT","Europe","Middle East & North Africa","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Marshall Islands","MH","MHL",867,"MHL","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Martinique","MQ","MTQ",349,"MTQ","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Mauritania","MR","MRT",682,"MRT","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Mauritius","MU","MUS",684,"MUS","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Mexico","MX","MEX",273,"MEX","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Micronesia (Federated States of)","FM","FSM",868,"FSM","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Moldova","MD","MDA",921,"MDA","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Monaco","MC","MCO",,"MCO","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Mongolia","MN","MNG",948,"MNG","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Montenegro","ME","MNE",943,"MNE","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Montserrat","MS","MSR",351,"MSR","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Morocco","MA","MAR",686,"MAR","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Mozambique","MZ","MOZ",688,"MOZ","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Myanmar (Burma)","MM","MMR",518,"MMR","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Namibia","NA","NAM",728,"NAM","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Nauru","NR","NRU",836,"NRU","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Nepal","NP","NPL",558,"NPL","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Netherlands","NL","NLD",138,"NLD","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"New Caledonia","NC","NCL",839,"NCL","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"New Zealand","NZ","NZL",196,"NZL","Oceania","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Nicaragua","NI","NIC",278,"NIC","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Niger","NE","NER",692,"NER","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Nigeria","NG","NGA",694,"NGA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Niue","NU","NIU",,"NIU","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Norfolk Island","NF","NFK",,"NFK","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"North Korea","KP","PRK",,"PRK","Asia","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"North Macedonia","MK","MKD",962,"MKD","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Northern Mariana Islands","MP","MNP",,"MNP","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Norway","NO","NOR",142,"NOR","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Oman","OM","OMN",449,"OMN","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Pakistan","PK","PAK",564,"PAK","Asia","South Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Palau","PW","PLW",565,"PLW","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Panama","PA","PAN",283,"PAN","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Papua New Guinea","PG","PNG",853,"PNG","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Paraguay","PY","PRY",288,"PRY","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Peru","PE","PER",293,"PER","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Philippines","PH","PHL",566,"PHL","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Pitcairn Islands","PN","PCN",,"PCN","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Poland","PL","POL",964,"POL","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Portugal","PT","PRT",182,"PRT","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Puerto Rico","PR","PRI",,"PRI","Americas","Latin America & Caribbean","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Qatar","QA","QAT",453,"QAT","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Romania","RO","ROU",968,"ROU","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Russia","RU","RUS",922,"RUS","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Rwanda","RW","RWA",714,"RWA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Saint Martin (French part)","MF","MAF",352,"MAF","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Samoa","WS","WSM",862,"WSM","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"San Marino","SM","SMR",135,"SMR","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Saudi Arabia","SA","SAU",456,"SAU","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Senegal","SN","SEN",722,"SEN","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Serbia","RS","SRB",942,"SRB","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Seychelles","SC","SYC",718,"SYC","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Sierra Leone","SL","SLE",724,"SLE","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Singapore","SG","SGP",576,"SGP","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Sint Maarten","SX","SXM",,"SXM","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Slovakia","SK","SVK",936,"SVK","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Slovenia","SI","SVN",961,"SVN","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Solomon Islands","SB","SLB",813,"SLB","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Somalia","SO","SOM",726,"SOM","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"South Africa","ZA","ZAF",199,"ZAF","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"South Georgia & South Sandwich Islands","GS","SGS",,"SGS",,"East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"South Korea","KR","KOR",542,"KOR","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"South Sudan","SS","SSD",733,"SSD","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Spain","ES","ESP",184,"ESP","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Sri Lanka","LK","LKA",524,"LKA","Asia","South Asia","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"St. Barthélemy","BL","BLM",,"BLM","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"St. Kitts & Nevis","KN","KNA",361,"KNA","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"St. Lucia","LC","LCA",362,"LCA","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"St. Pierre & Miquelon","PM","SPM",363,"SPM","Americas","North America","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"St. Vincent & Grenadines","VC","VCT",364,"VCT","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Sudan","SD","SDN",732,"SDN","Africa","Sub-Saharan Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Suriname","SR","SUR",366,"SUR","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Svalbard & Jan Mayen","SJ","SJM",,"SJM","Europe",,"WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Sweden","SE","SWE",144,"SWE","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Switzerland","CH","CHE",146,"CHE","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Syria","SY","SYR",463,"SYR","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"São Tomé & Príncipe","ST","STP",716,"STP","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Taiwan","TW","TWN",528,"TWN","Asia","East Asia & Pacific","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"Tajikistan","TJ","TJK",923,"TJK","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Tanzania","TZ","TZA",738,"TZA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Thailand","TH","THA",578,"THA","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Timor-Leste","TL","TLS",537,"TLS","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Togo","TG","TGO",742,"TGO","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Tokelau","TK","TKL",,"TKL","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Tonga","TO","TON",866,"TON","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Trinidad & Tobago","TT","TTO",369,"TTO","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Tunisia","TN","TUN",744,"TUN","Africa","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Turkey","TR","TUR",186,"TUR","Asia","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Turkmenistan","TM","TKM",925,"TKM","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Turks & Caicos Islands","TC","TCA",,"TCA","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Tuvalu","TV","TUV",,"TUV","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"U.S. Virgin Islands","VI","VIR",,"VIR","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Uganda","UG","UGA",746,"UGA","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Ukraine","UA","UKR",926,"UKR","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"United Arab Emirates","AE","ARE",466,"ARE","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"United Kingdom","GB","GBR",112,"GBR","Europe","Europe & Central Asia","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"United States","US","USA",111,"USA","Americas","North America","Advanced Economies","Advanced Economies",TRUE,TRUE,TRUE,TRUE
+"United States Minor Outlying Islands (the)","UM","UMI",,"UMI",,,"WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Uruguay","UY","URY",298,"URY","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Uzbekistan","UZ","UZB",927,"UZB","Asia","Europe & Central Asia","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Vanuatu","VU","VUT",846,"VUT","Oceania","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Vatican City","VA","VAT",,"VAT","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Venezuela","VE","VEN",299,"VEN","Americas","Latin America & Caribbean","Emerging Economies","Latin America and the Caribbean",TRUE,TRUE,TRUE,TRUE
+"Vietnam","VN","VNM",582,"VNM","Asia","East Asia & Pacific","Emerging Economies","Emerging and Developing Asia",TRUE,TRUE,TRUE,TRUE
+"Yemen","YE","YEM",474,"YEM","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
+"Zambia","ZM","ZMB",754,"ZMB","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Zimbabwe","ZW","ZWE",698,"ZWE","Africa","Sub-Saharan Africa","Emerging Economies","Sub-Saharan Africa",TRUE,TRUE,TRUE,TRUE
+"Åland Islands","AX","ALA",,"ALA","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Kosovo","XK","XKX",967,"KOS","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
+"Netherlands Antilles","AN","ANT",353,"ANT","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Curacao & St. Maarten","1C_355","CUW",355,"CWX","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"West Bank and Gaza",,"WBG",487,"WBG","Asia","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Jersey","JE","JEY",,"TX117","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
+"Western Sahara","EH","ESH",,"TX793","Africas","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
+"Bouvet Island","BT","BVT",,"TX865","Antartica","Antartica","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
+"Cocos (Keeling) Islands","CC","CCK",,"TX871","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",FALSE,TRUE,FALSE,FALSE
+"Christmas Island","CX","CXR",,"CXR","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Heard & McDonald Islands","HM","HDM",,"TX872","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",FALSE,TRUE,FALSE,FALSE
+"Réunion","RE","REU",696,"REU","Africas","RegionSub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Wallis & Futuna","WF","WLF",,"WLF","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"St. Helena","SH","SHN",856,"SHN","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Mayotte","YT","MYT",,"MYT","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"British Indian Ocean Territory","IO","IOT",,"MYT","Asia","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"French Southern Territories","TF","ATF",,"ATF","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Czechoslovakia",,"CSK",934,"CSK","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"German Democratic Republic",,"DDR",278,"DDR","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Serbia and Montenegro",,"SCG",891,"SCG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Union of Soviet Socialist Republics (USSR)",,"SUN",810,"SUN","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Vietnam, Democratic Republic of",,"VDR",,"VDR","Asia","East Asia & Pacific","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Yemen Arab Republic",,"YAR",,"YAR","Asia","Middle East & North Africa","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Yemen People's Republic",,"YMD",720,"YMD","Asia","Middle East & North Africa","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Yugoslavia",,"YUG",188,"YUG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE

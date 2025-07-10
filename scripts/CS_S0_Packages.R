@@ -2,19 +2,7 @@
 
 #0 INSTALL AND LOAD PACKAGES
 
-# Install devtools if not installed
-if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
-library(devtools)
-
-# Install imfr package (GitHub, outside CRAN) if not installed
-if (!requireNamespace("imfr", quietly = TRUE)) install_github("christophergandrud/imfr")
-library(imfr)
-
-#For API downloads
-if (!requireNamespace("rsdmx", quietly = TRUE)) install.packages("rsdmx")
-library(rsdmx)
-
-# Function to check and load packages
+# 0.1 Function to check and load packages
 load_packages <- function(packages) {
   for (pkg in packages) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -24,19 +12,34 @@ load_packages <- function(packages) {
   }
 }
 
-packages <- c("tidyverse", "BISdata", "countrycode", "pbapply", "purrr", "moments", #Data management packages
+packages <- c("rsdmx", "remotes", #Data download
+              "tidyverse", "BISdata", "countrycode", "pbapply", "purrr", "moments", #Data management packages
               "igraph", "BBmisc", #For network analysis
               "ggraph", "circlize", "cowplot", "gridExtra", "grid", "ggpubr", "gridGraphics", "ggplotify", "ggrepel", #For visualization
               "tinytex", "extrafont", "rmdwc", "knitr", "kableExtra", "apaTables", "tinylabels", #For R-Markdown formatting
               "papaja", "dplyr", "tidyr", "plm", "stargazer", "panelvar", "pwt10" #For performing P-VAR
               ) 
 
-# Load all packages
+# 0.2 Load all packages
 load_packages(packages)
 rm(packages)
 rm(load_packages)
 
-# Set the path to import/save files based on the script’s directory
+# 0.2
+
+# Root directory of the Git project
+project_dir <- system("git rev-parse --show-toplevel", intern = TRUE)
+
+# Paths
+data_dir <- file.path(project_dir, "data")
+outputs_dir <- file.path(project_dir, "outputs")
+
+# Ensure folders exist (optional but safe)
+dir.create(data_dir, showWarnings = FALSE)
+dir.create(outputs_dir, showWarnings = FALSE)
+
+
+# 0.3 Set the path to import/save files based on the script’s directory
 if (requireNamespace("rstudioapi", quietly = TRUE)) {
   setPath <- dirname(rstudioapi::getSourceEditorContext()$path) # Get the folder of the current script
   setwd(setPath)
