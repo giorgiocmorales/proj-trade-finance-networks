@@ -199,8 +199,30 @@ pip_counterpart_sector_values <- {
   )
 }
 
-# 1.3.8 Clean up
-rm(pip_structure, pip_structure_list, pip_structure_ids, pip_structure_index, pip_dsd, pip_dimensions, pip_dimension_ids, pip_codelists, pip_codelist_ids, sector_indices,
+# 1.3.8 Extract accounting entry disaggregation
+accounting_indices <- which(pip_codelist_ids == "CL_ACCOUNTING_ENTRY")
+
+pip_acconting_values <- {
+  codes <- pip_codelists[[accounting_indices[1]]]@Code
+  data.frame(
+    id = sapply(codes, function(x) x@id),
+    label = sapply(codes, function(x) x@name$en),
+    stringsAsFactors = FALSE
+  )
+}
+
+pip_ac_entry_values <- {
+  codes <- pip_codelists[[accounting_indices[2]]]@Code
+  data.frame(
+    id = sapply(codes, function(x) x@id),
+    label = sapply(codes, function(x) x@name$en),
+    stringsAsFactors = FALSE
+  )
+}
+
+# 1.3.9 Clean up
+rm(pip_structure, pip_structure_list, pip_structure_ids, pip_structure_index, pip_dsd, pip_dimensions, pip_dimension_ids, pip_codelists, pip_codelist_ids, 
+   sector_indices, accounting_indices,
    codes)
 rm(extract_pip_codelist_df)
 gc()
