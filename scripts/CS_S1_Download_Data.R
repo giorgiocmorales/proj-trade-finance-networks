@@ -900,6 +900,11 @@ lbs_counterpart_country %>%
   filter(!(country_code %in% country_set$iso2c)) %>%
   print(n = nrow(.))
 
+#Check not in country_set
+lbs_counterpart_country %>% 
+  filter(!(country_code %in% country_set$iso2c)) %>%
+  print(n = nrow(.))
+
 #Filter for processing 
 lbs_base_filtered <- tibble()
 

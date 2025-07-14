@@ -409,7 +409,7 @@ manual_overrides_current <- tibble::tribble(
   "XKX",  "XK",    "Kosovo, Republic of",               "KOS",    "Europe",   "Europe & Central Asia",      967, "Kosovo",
   "ANT",  "AN",    "Netherlands Antilles",              "ANT",    "Americas", "Latin America & Caribbean",  353, "Netherlands Antilles",
   "CUW",  "1C_355","Curacao & St. Maarten",             "CWX",    "Americas", "Latin America & Caribbean",  355, NA,
-  "WBG",  NA,      "West Bank and Gaza",                "WBG",    "Asia",     "Middle East & North Africa", 487, NA, #Will replace Palestinian territories
+  "WBG",  "PS",     "West Bank and Gaza",                "WBG",    "Asia",     "Middle East & North Africa", 487, NA, #Will replace Palestinian territories
   "JEY",  "JE",    "Jersey",                            "TX117",  "Europe",   "Europe & Central Asia",      NA,  "Jersey",
   "ESH",  "EH",     "Western Sahara",                   "TX793",  "Africas",   "Middle East & North Africa",NA,  "Western Sahara",
   "BVT",  "BT",     "Bouvet Island",                    "TX865",  "Antartica","Antartica",                  NA,  "Bouvet Island",
@@ -427,14 +427,14 @@ manual_overrides_current <- tibble::tribble(
 # Former countries block (IMF dataset-consistent names)
 manual_overrides_former <- tibble::tribble(
   ~iso3c, ~iso2c, ~label,                             ~sdmx_code, ~continent, ~region, ~imf, ~replace_target,
-  "CSK",  NA,     "Czechoslovakia",                             "CSK", "Europe",   "Europe & Central Asia",     934, "Czechoslovakia",
-  "DDR",  NA,     "German Democratic Republic",                 "DDR", "Europe",   "Europe & Central Asia",     278, "German Democratic Republic",
-  "SCG",  NA,     "Serbia and Montenegro",                      "SCG", "Europe",   "Europe & Central Asia",     891, "Serbia and Montenegro",
-  "SUN",  NA,     "Union of Soviet Socialist Republics (USSR)", "SUN", "Europe",   "Europe & Central Asia",     810, NA,
+  "CSK",  "C9",     "Czechoslovakia",                             "CSK", "Europe",   "Europe & Central Asia",     934, "Czechoslovakia",
+  "DDR",  "DD",     "German Democratic Republic",                 "DDR", "Europe",   "Europe & Central Asia",     278, "German Democratic Republic",
+  "SCG",  "CS",     "Serbia and Montenegro",                      "SCG", "Europe",   "Europe & Central Asia",     891, "Serbia and Montenegro",
+  "SUN",  "SU",   "Union of Soviet Socialist Republics (USSR)", "SUN", "Europe",   "Europe & Central Asia",     810, NA,
   "VDR",  NA,     "Vietnam, Democratic Republic of",            "VDR", "Asia",     "East Asia & Pacific",        NA, NA,  
   "YAR",  NA,     "Yemen Arab Republic",                        "YAR", "Asia",     "Middle East & North Africa", NA, "Yemen Arab Republic",
   "YMD",  NA,     "Yemen, People's Democratic Republic of",     "YMD", "Asia",     "Middle East & North Africa", 720, "Yemen People's Republic",
-  "YUG",  NA,     "Yugoslavia, Socialist Federal Republic of",  "YUG", "Europe",   "Europe & Central Asia",      188, "Yugoslavia"
+  "YUG",  "YU",     "Yugoslavia, Socialist Federal Republic of",  "YUG", "Europe",   "Europe & Central Asia",      188, "Yugoslavia"
 ) %>% mutate(status = "former",
              weo_group_major = "Former Countries",
              weo_group_region = "Former Countries")
@@ -490,7 +490,6 @@ country_set <- codelist_adjusted %>%
   )
 
 # 1.5.10 Clean up
-
 rm(imts_country_values, dip_country_values, pip_country_values, weo_country_values)
 rm(codelist_adjusted, codelist_base, valid_iso3c, valid_names, manual_combined, manual_overrides_current, manual_overrides_former)
 gc()
@@ -501,4 +500,4 @@ gc()
 write.csv(country_set, file.path(data_dir, "country_set.csv"), row.names = FALSE, fileEncoding = "UTF-8", na = "")
 
 # Save R environment
-save.image(file = file.path(data_dir, "session_checkpoint.RData"))
+save.image(file = file.path(data_dir, "session_checkpoint_S1.RData"))
