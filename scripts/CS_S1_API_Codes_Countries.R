@@ -1,5 +1,7 @@
 # CUNTO SANTANA (20XX)
 
+# DATABASE CHECK AND COUNTRY SET -----
+
 # 1.0 RETRIEVE AND INSPECT AVAILABLE IMF DATASETS ------------------------------
 
 # 1.0.1 Load all dataflows (available IMF datasets)
@@ -405,18 +407,18 @@ rm(codelist)
 
 # Manual current country overrides with SDMX code
 manual_overrides_current <- tibble::tribble(
-  ~iso3c, ~iso2c, ~label,                 ~sdmx_code, ~continent, ~region, ~imf, ~replace_target,
-  "XKX",  "XK",    "Kosovo, Republic of",               "KOS",    "Europe",   "Europe & Central Asia",      967, "Kosovo",
-  "ANT",  "AN",    "Netherlands Antilles",              "ANT",    "Americas", "Latin America & Caribbean",  353, "Netherlands Antilles",
-  "CUW",  "1C_355","Curacao & St. Maarten",             "CWX",    "Americas", "Latin America & Caribbean",  355, NA,
-  "WBG",  "PS",     "West Bank and Gaza",                "WBG",    "Asia",     "Middle East & North Africa", 487, NA, #Will replace Palestinian territories
-  "JEY",  "JE",    "Jersey",                            "TX117",  "Europe",   "Europe & Central Asia",      NA,  "Jersey",
-  "ESH",  "EH",     "Western Sahara",                   "TX793",  "Africas",   "Middle East & North Africa",NA,  "Western Sahara",
+  ~iso3c, ~iso2c, ~label,                             ~sdmx_code, ~continent, ~region,                    ~imf, ~replace_target,
+  "XKX",  "XK",     "Kosovo, Republic of",              "KOS",    "Europe",   "Europe & Central Asia",      967, "Kosovo",
+  "ANT",  "AN",     "Netherlands Antilles",             "ANT",    "Americas", "Latin America & Caribbean",  353, "Netherlands Antilles",
+  "CWX",  "1C_355", "Curacao & St. Maarten",            "CWX",    "Americas", "Latin America & Caribbean",  355, NA,
+  "PSE",  "PS",     "West Bank and Gaza",               "WBG",    "Asia",     "Middle East & North Africa", 487, "Palestinian Territories",
+  "JEY",  "JE",     "Jersey",                           "TX117",  "Europe",   "Europe & Central Asia",      NA,  "Jersey",
+  "ESH",  "EH",     "Western Sahara",                   "TX793",  "Africa",  "Middle East & North Africa",  NA,  "Western Sahara",
   "BVT",  "BT",     "Bouvet Island",                    "TX865",  "Antartica","Antartica",                  NA,  "Bouvet Island",
   "CCK",  "CC",     "Cocos (Keeling) Islands",          "TX871" , "Oceania",  "East Asia & Pacific",        NA,  "Cocos (Keeling) Islands",
   "CXR",  "CX",     "Christmas Island",                 "CXR",    "Oceania",  "East Asia & Pacific",        NA,  "Christmas Island", #TX814 alternative
-  "HDM",  "HM",     "Heard Island and McDonald Islands","TX872",  "Oceania", "East Asia & Pacific",         NA,  "Heard & McDonald Islands",
-  "REU",  "RE",     "Réunion",                          "REU",    "Africas",   "RegionSub-Saharan Africa",  696, "Réunion",
+  "HDM",  "HM",     "Heard Island and McDonald Islands","TX872",  "Oceania",  "East Asia & Pacific",        NA,  "Heard & McDonald Islands",
+  "REU",  "RE",     "Réunion",                          "REU",    "Africas",  "RegionSub-Saharan Africa",   696, "Réunion",
   "WLF",  "WF",     "Wallis and Futuna Islands",        "WLF",    "Oceania",  "East Asia & Pacific",        NA,  "Wallis & Futuna",
   "SHN",  "SH",     "St. Helena",                       "SHN",    "Africa",   "Sub-Saharan Africa",         856, "St. Helena",
   "MYT",  "YT",     "Mayotte",                          "MYT",    "Africa",   "Sub-Saharan Africa",         NA,  "Mayotte",
@@ -430,10 +432,10 @@ manual_overrides_former <- tibble::tribble(
   "CSK",  "C9",     "Czechoslovakia",                             "CSK", "Europe",   "Europe & Central Asia",     934, "Czechoslovakia",
   "DDR",  "DD",     "German Democratic Republic",                 "DDR", "Europe",   "Europe & Central Asia",     278, "German Democratic Republic",
   "SCG",  "CS",     "Serbia and Montenegro",                      "SCG", "Europe",   "Europe & Central Asia",     891, "Serbia and Montenegro",
-  "SUN",  "SU",   "Union of Soviet Socialist Republics (USSR)", "SUN", "Europe",   "Europe & Central Asia",     810, NA,
-  "VDR",  NA,     "Vietnam, Democratic Republic of",            "VDR", "Asia",     "East Asia & Pacific",        NA, NA,  
-  "YAR",  NA,     "Yemen Arab Republic",                        "YAR", "Asia",     "Middle East & North Africa", NA, "Yemen Arab Republic",
-  "YMD",  NA,     "Yemen, People's Democratic Republic of",     "YMD", "Asia",     "Middle East & North Africa", 720, "Yemen People's Republic",
+  "SUN",  "SU",     "Union of Soviet Socialist Republics (USSR)", "SUN", "Europe",   "Europe & Central Asia",     810, NA,
+  "VDR",  NA,       "Vietnam, Democratic Republic of",            "VDR", "Asia",     "East Asia & Pacific",        NA, NA,  
+  "YAR",  NA,       "Yemen Arab Republic",                        "YAR", "Asia",     "Middle East & North Africa", NA, "Yemen Arab Republic",
+  "YMD",  NA,       "Yemen, People's Democratic Republic of",     "YMD", "Asia",     "Middle East & North Africa", 720, "Yemen People's Republic",
   "YUG",  "YU",     "Yugoslavia, Socialist Federal Republic of",  "YUG", "Europe",   "Europe & Central Asia",      188, "Yugoslavia"
 ) %>% mutate(status = "former",
              weo_group_major = "Former Countries",
@@ -494,7 +496,7 @@ rm(imts_country_values, dip_country_values, pip_country_values, weo_country_valu
 rm(codelist_adjusted, codelist_base, valid_iso3c, valid_names, manual_combined, manual_overrides_current, manual_overrides_former)
 gc()
 
-# 1.5.10 Save environment
+# 1.5.11 Save environment
 
 # Save country set
 write.csv(country_set, file.path(data_dir, "country_set.csv"), row.names = FALSE, fileEncoding = "UTF-8", na = "")

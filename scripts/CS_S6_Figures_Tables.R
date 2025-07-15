@@ -1,6 +1,6 @@
 #CUNTO SANTANA (20XX)
 
-#5 FIGURES AND TABLES
+# 6 FIGURES AND TABLES
 
 # X.  Visualizations and results---------
 
