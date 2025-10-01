@@ -2,268 +2,291 @@
 
 # 3 NETWORK ANALYSIS---
 
-##2.1 Network and Jurisdiction Measures-------
+## 3.1 Network and Jurisdiction Measures-------
 
 # Function to process datasets with an option for inflation adjustment
-process_financial_network <- function(data, country_set, dataset_name, handle_obstatus = FALSE, use_inflation_adjusted = FALSE, invert_direction = FALSE) {
+process_network <- function(data, 
+                            country_set, 
+                            dataset_name, 
+                            value_column = "value_adj_cons", 
+                            source_filter = NULL,
+                            direction_map,
+                            handle_obstatus = TRUE) {
+  
+  epsilon <- 1e-10
+  
+  # Optional filtering by source
+  if (!is.null(source_filter)) {
+    data <- data %>% filter(source %in% source_filter)
+  }
+  
+  # Output containers
   graph_list <- list()
   network_scores <- tibble()
   jurisdiction_scores <- tibble()
   
-  # Selecting the appropriate weight column based on user choice
-  weight_col <- if(use_inflation_adjusted) "position_adj_cons" else "position_adj"
-  epsilon <- 1e-10  # Define a small constant for epsilon
-  
-  for(i in unique(data$year)) {
-    # Subset the data for the current year early to avoid repeating filtering
+  for (i in unique(data$year)) {
+    
+    # Subset and assign weights
     year_data <- data %>%
       filter(year == i) %>%
-      mutate(weight = .data[[weight_col]])  # Ensure weight is initialized here from the correct column
+      mutate(weight = .data[[value_column]])
     
-    if(handle_obstatus) {
-      # Update weight based on obstatus conditionally
+    # Handle confidential observations
+    if (handle_obstatus) {
       year_data <- year_data %>%
         mutate(weight = ifelse(obs_status == "C" & is.na(weight), epsilon, weight))
     } else {
-      # Drop rows with NaN values in the weight column if not handling obstatus
-      year_data <- year_data %>%
-        filter(!is.nan(weight))
+      year_data <- year_data %>% filter(!is.nan(weight))
     }
     
-    # Ensure no NaN values in weights
+    # Final NA cleanup
+    year_data <- year_data %>% filter(!is.na(weight) & !is.nan(weight))
+    
+    # Assign direction per source
     year_data <- year_data %>%
-      filter(!is.nan(weight))
+      mutate(
+        invert = as.logical(direction_map[source]),
+        from = ifelse(invert, counterpart_iso3, jurisdiction_iso3),
+        to   = ifelse(invert, jurisdiction_iso3, counterpart_iso3)
+      )
     
-    # Graph construction
-    if (invert_direction) {
-      edges <- year_data %>%
-        rename(from = counterpart_iso3, to = jurisdiction_iso3) %>%
-        select(from, to, weight, source)
-    } else {
-      edges <- year_data %>%
-        rename(from = jurisdiction_iso3, to = counterpart_iso3) %>%
-        select(from, to, weight, source)
-    }
+    # Construct edges
+    edges <- year_data %>% select(from, to, weight, source)
     
+    # Construct nodes
     nodes <- country_set %>%
       rename(vertices = iso3c) %>%
       select(vertices, country.name.en, region, weo_group_region)
     
+    # Create graph
     graph <- graph_from_data_frame(d = edges, vertices = nodes, directed = TRUE)
-    
-    # Store the graph with the dataset name and year
     graph_key <- paste(dataset_name, as.character(i), sep = "_")
     graph_list[[graph_key]] <- graph
     
-    # Network Attributes
+    # Graph attributes
     graph <- graph %>%
-      set_graph_attr("year", value = i) %>%
-      set_edge_attr("n_weight", value = E(graph)$weight/max(E(graph)$weight)) %>% # Normalized weights
-      set_edge_attr("dist_weight", value = 1/abs(E(graph)$weight)) %>% # Inverse weight for when algorithms penalize larger values (larger distance)
-      set_vertex_attr("n_region", value = as.integer(factor(nodes$region, levels = unique(nodes$region)))) %>%
-      set_vertex_attr("n_weo_group_region", value = as.integer(factor(nodes$weo_group_region, levels = unique(nodes$weo_group_region)))) %>%
-      delete_vertices(c(names(which(igraph::degree(graph) == 0))))
+      set_graph_attr("year", i) %>%
+      set_graph_attr("dataset", dataset_name) %>%
+      set_edge_attr("n_weight", value = E(graph)$weight / max(E(graph)$weight, na.rm = TRUE)) %>%
+      set_edge_attr("dist_weight", value = 1 / abs(E(graph)$weight)) %>%
+      set_vertex_attr("n_region", value = as.integer(factor(V(graph)$region, levels = unique(nodes$region)))) %>%
+      set_vertex_attr("n_weo_group_region", value = as.integer(factor(V(graph)$weo_group_region, levels = unique(nodes$weo_group_region)))) %>%
+      delete_vertices(names(which(igraph::degree(graph) == 0)))
     
-    # Ensure no NaN values in edge attributes
     E(graph)$weight[is.na(E(graph)$weight)] <- epsilon
     E(graph)$dist_weight[is.na(E(graph)$dist_weight)] <- epsilon
     
-    # Network measures
-    features <- tibble(Year = i, # Year
-                       Nodes = gorder(graph), # Number of nodes
-                       Edges = gsize(graph), # Number of links
-                       Density = edge_density(graph), # Density
-                       Mean_distance_uw = mean_distance(graph, directed = TRUE, weights = NA), #Mean distance unweighted
-                       Mean_distance_w = mean_distance(graph, directed = TRUE, weights = abs(E(graph)$weight)), # Mean Distance (weights must be positive)
-                       Transitivity_uw = transitivity(graph, weights = NA), # Transitivity (Unweighted)
-                       Transitivity_w = transitivity(graph, weights = E(graph)$dist_weight), # Transitivity (Weighted)
-                       Reciprocity = reciprocity(graph), # Reciprocity
-                       Diameter_uw = diameter(graph, directed = TRUE, weights = NA), # Diameter (Unweighted)
-                       Diameter_w = diameter(graph, directed = TRUE, weights = abs(E(graph)$dist_weight)), # Diameter (Weighted) (weights must be positive)
-                       Assortativity_r = assortativity_nominal(graph, V(graph)$n_region),
-                       Assortativity_weo = assortativity_nominal(graph, V(graph)$n_weo_group_region), # Assortativity
-                       Acyclic = is_acyclic(graph)) #Check for cycles on the graph
-    
-    # Create network results
+    # Network metrics
+    features <- tibble(
+      Year = i,
+      Nodes = gorder(graph),
+      Edges = gsize(graph),
+      Density = edge_density(graph),
+      Mean_distance_uw = mean_distance(graph, directed = TRUE, weights = NA),
+      Mean_distance_w  = mean_distance(graph, directed = TRUE, weights = abs(E(graph)$weight)),
+      Transitivity_uw  = transitivity(graph, weights = NA),
+      Transitivity_w   = transitivity(graph, weights = E(graph)$dist_weight),
+      Reciprocity = reciprocity(graph),
+      Diameter_uw = diameter(graph, directed = TRUE, weights = NA),
+      Diameter_w  = diameter(graph, directed = TRUE, weights = abs(E(graph)$dist_weight)),
+      Assortativity_r = assortativity_nominal(graph, V(graph)$n_region),
+      Assortativity_weo = assortativity_nominal(graph, V(graph)$n_weo_group_region),
+      Acyclic = is_acyclic(graph)
+    )
     network_scores <- bind_rows(network_scores, features)
     
-    # Jurisdiction measures
-    
-    ## Strength
-    # Out Strength 
+    # Jurisdiction-level metrics
     V(graph)$strength_out <- strength(graph, mode = "out")
-    # In Strength 
-    V(graph)$strength_in <- strength(graph, mode = "in")
-    # Total Strength 
+    V(graph)$strength_in  <- strength(graph, mode = "in")
     V(graph)$strength_total <- strength(graph, mode = "total")
     
-    ## Centralities
-    
-    # Out-degree
     V(graph)$degree_out <- igraph::degree(graph, mode = "out")
-    # In-degree
-    V(graph)$degree_in <- igraph::degree(graph, mode = "in")
+    V(graph)$degree_in  <- igraph::degree(graph, mode = "in")
     
-    # Closeness Un-Weighted
     V(graph)$closeness_uw <- closeness(graph, mode = "all", weights = NA)
-    # Closeness Weighted
-    V(graph)$closeness_w <- closeness(graph, mode = "all", weights = abs(E(graph)$dist_weight)) # Weights must be positive
+    V(graph)$closeness_w  <- closeness(graph, mode = "all", weights = abs(E(graph)$dist_weight))
     
-    # Betweenness Un-Weighted
     V(graph)$betweenness_uw <- betweenness(graph, weights = NA)
-    # Betweenness Weighted
-    V(graph)$betweenness_w <- betweenness(graph, weights = abs(E(graph)$dist_weight) + epsilon) # Weights as distance (must be positive) Add epsilon to solve for 
+    V(graph)$betweenness_w  <- betweenness(graph, weights = abs(E(graph)$dist_weight) + epsilon)
     
-    # Eigenvector Un-Weighted
     V(graph)$eigen_vector_uw <- eigen_centrality(graph, directed = TRUE, weights = NA)$vector
-    # Eigenvector Weighted
-    V(graph)$eigen_vector_w <- eigen_centrality(graph, directed = TRUE, weights = abs(E(graph)$weight))$vector
+    V(graph)$eigen_vector_w  <- eigen_centrality(graph, directed = TRUE, weights = abs(E(graph)$weight))$vector
     
-    # Alpha Un-Weighted
-    V(graph)$alpha_uw <- alpha_centrality(graph, alpha = (1/eigen_centrality(graph, directed = TRUE, weights = NA)$value)*0.5, weights = NA)
-    # Alpha Weighted
-    V(graph)$alpha_w <- alpha_centrality(graph, alpha = (1/eigen_centrality(graph, directed = TRUE, weights = abs(E(graph)$weight))$value)*0.5)
+    V(graph)$alpha_uw <- alpha_centrality(graph, alpha = (1 / eigen_centrality(graph, directed = TRUE, weights = NA)$value) * 0.5, weights = NA)
+    V(graph)$alpha_w  <- alpha_centrality(graph, alpha = (1 / eigen_centrality(graph, directed = TRUE, weights = abs(E(graph)$weight))$value) * 0.5)
     
-    # Page Rank Un-Weighted
     V(graph)$page_rank_uw <- page_rank(graph, directed = TRUE, weights = NA)$vector
-    # Page Rank Weighted
-    V(graph)$page_rank_w <- page_rank(graph, directed = TRUE, weights = abs(E(graph)$weight))$vector
+    V(graph)$page_rank_w  <- page_rank(graph, directed = TRUE, weights = abs(E(graph)$weight))$vector
     
-    # Add results
-    results <- igraph::as_data_frame(graph, what = "vertices") %>%
+    # Store node metrics
+    results <- as_data_frame(graph, what = "vertices") %>%
       mutate(year = i) %>%
       select(year, everything())
     
     jurisdiction_scores <- bind_rows(jurisdiction_scores, results)
-    
-    # Delete nodes and edges
-    rm(edges)
-    rm(nodes)
-    
-    ## Graph list
-    graph_list[[graph_key]] <- graph
   }
   
-  return(list(graphs = graph_list, scores = network_scores, jurisdiction = jurisdiction_scores))
+  return(list(
+    graphs = graph_list,
+    scores = network_scores,
+    jurisdiction = jurisdiction_scores
+  ))
 }
 
-##2.2 Interconnectedness Index -------
+# Mapping of directions for inversion ------
 
-# Function to normalize and calculate indices
-calculate_indices <- function(jurisdiction_scores) {
-  # Initialize an empty tibble for normalized annual scores
-  jurisdiction_scores_normalized <- tibble()
+direction_map <- c(
+  # Trade (goods)
+  "IMTS Exports" = FALSE,   # exporter -> importer
+  "IMTS Imports" = TRUE,    # recorded at importer; invert to exporter -> importer
   
-  # Annual normalization
-  for(i in unique(jurisdiction_scores$year)){
-    temporary_dataframe <- jurisdiction_scores %>% 
-      filter(year == i) %>%
-      mutate(
-        # Normalizing strength measures
-        strength_out_norm = BBmisc::normalize(strength_out, method = "range", range = c(0, 1)),
-        strength_in_norm = BBmisc::normalize(strength_in, method = "range", range = c(0, 1)),
-        strength_total_norm = BBmisc::normalize(strength_total, method = "range", range = c(0, 1)),
-        
-        # Normalizing degree measures
-        degree_out_norm = BBmisc::normalize(degree_out, method = "range", range = c(0, 1)),
-        degree_in_norm = BBmisc::normalize(degree_in, method = "range", range = c(0, 1)),
-        
-        # Normalizing closeness measures
-        closeness_uw_norm = BBmisc::normalize(closeness_uw, method = "range", range = c(0, 1)),
-        closeness_w_norm = BBmisc::normalize(closeness_w, method = "range", range = c(0, 1)),
-        
-        # Normalizing betweenness measures
-        betweenness_uw_norm = BBmisc::normalize(betweenness_uw, method = "range", range = c(0, 1)),
-        betweenness_w_norm = BBmisc::normalize(betweenness_w, method = "range", range = c(0, 1)),
-        
-        # Normalizing eigenvector measures
-        eigen_vector_uw_norm = BBmisc::normalize(eigen_vector_uw, method = "range", range = c(0, 1)),
-        eigen_vector_w_norm = BBmisc::normalize(eigen_vector_w, method = "range", range = c(0, 1)),
-        
-        # Normalizing alpha measures
-        alpha_uw_norm = BBmisc::normalize(alpha_uw, method = "range", range = c(0, 1)),
-        alpha_w_norm = BBmisc::normalize(alpha_w, method = "range", range = c(0, 1)),
-        
-        # Normalizing page rank measures
-        page_rank_uw_norm = BBmisc::normalize(page_rank_uw, method = "range", range = c(0, 1)),
-        page_rank_w_norm = BBmisc::normalize(page_rank_w, method = "range", range = c(0, 1))) %>%
+  # Portfolio
+  "PIP Assets"      = FALSE, # holder (reporter) -> issuer (counterpart)
+  "PIP Liabilities" = TRUE,  # recorded at debtor; invert to holder -> issuer
+  
+  # Direct investment
+  "DIP Outward" = FALSE,  # investor (reporter) -> target (counterpart)
+  "DIP Inward"  = TRUE,   # recorded at host; invert to investor -> target
+  
+  # Cross‑border banking
+  "LBS Claims"      = FALSE, # reporting banks’ claims -> counterparty
+  "LBS Liabilities" = TRUE   # recorded at debtor; invert to creditor -> debtor
+)
+
+
+# Test ----
+finance_network <- process_network(data = dataset_base_filtered,
+                                   country_set = country_set,
+                                   dataset_name = "finance_network",
+                                   value_column = "value_adj_cons",
+                                   source_filter = c("PIP Assets","DIP Outward","LBS Claims"),
+                                   direction_map = direction_map,
+                                   handle_obstatus = FALSE)
+
+trade_network <- process_network(data = dataset_base_filtered,
+                                   country_set = country_set,
+                                   dataset_name = "finance_network",
+                                   value_column = "value_adj_cons",
+                                   source_filter = c("IMTS Exports"),
+                                   direction_map = direction_map,
+                                   handle_obstatus = FALSE)
+
+#Test results
+trade_network_scores <- trade_network$scores
+print(trade_network_scores)
+
+finance_network_scores <- finance_network$scores
+print(finance_network_scores)
+
+
+trade_country_scores <- trade_network$jurisdiction
+print(trade_country_scores)
+
+finance_country_scores <- finance_network$jurisdiction
+print(finance_country_scores)
+
+##2.2 Normalize -------
+
+# Normalize measures
+
+normalize_measures <- function(jurisdiction_scores) {
+  
+  # ---- Annual normalization ----
+  jurisdiction_scores_normalized <- jurisdiction_scores %>%
+    group_by(year) %>%
+    mutate(
+      # Strength measures
+      strength_out_norm    = normalize(strength_out, method = "range", range = c(0, 1)),
+      strength_in_norm     = normalize(strength_in, method = "range", range = c(0, 1)),
+      strength_total_norm  = normalize(strength_total, method = "range", range = c(0, 1)),
       
-      # Calculating indices
-      mutate(index_str = rowMeans(select(., c(strength_out_norm, strength_in_norm, strength_total_norm))),
-             index_uw = rowMeans(select(., c(degree_out_norm, degree_in_norm, closeness_uw_norm, betweenness_uw_norm, eigen_vector_uw_norm, alpha_uw_norm, page_rank_uw_norm))),
-             index_w = rowMeans(select(., c(closeness_w_norm, betweenness_w_norm, eigen_vector_w_norm, alpha_w_norm, page_rank_w_norm)))) %>%
-      mutate(index_final_norm = rowMeans(select(., c(index_str, index_uw, index_w))) * 100,
-             index_rank_norm = rank(desc(index_final_norm))) %>%
-      select(year, name, country.name.en, region, weo_group_region, 
-             strength_out_norm, strength_in_norm, strength_total_norm, 
-             degree_out_norm, degree_in_norm, closeness_uw_norm, closeness_w_norm,
-             betweenness_uw_norm, betweenness_w_norm, eigen_vector_uw_norm, eigen_vector_w_norm, 
-             alpha_uw_norm, alpha_w_norm, page_rank_uw_norm, page_rank_w_norm,
-             index_str, index_uw, index_w, index_final_norm, index_rank_norm)
-    
-    jurisdiction_scores_normalized <- bind_rows(jurisdiction_scores_normalized, temporary_dataframe)
-  }
+      # Degree measures
+      degree_out_norm      = normalize(degree_out, method = "range", range = c(0, 1)),
+      degree_in_norm       = normalize(degree_in, method = "range", range = c(0, 1)),
+      
+      # Closeness measures
+      closeness_uw_norm    = normalize(closeness_uw, method = "range", range = c(0, 1)),
+      closeness_w_norm     = normalize(closeness_w, method = "range", range = c(0, 1)),
+      
+      # Betweenness measures
+      betweenness_uw_norm  = normalize(betweenness_uw, method = "range", range = c(0, 1)),
+      betweenness_w_norm   = normalize(betweenness_w, method = "range", range = c(0, 1)),
+      
+      # Eigenvector measures
+      eigen_vector_uw_norm = normalize(eigen_vector_uw, method = "range", range = c(0, 1)),
+      eigen_vector_w_norm  = normalize(eigen_vector_w, method = "range", range = c(0, 1)),
+      
+      # Alpha measures
+      alpha_uw_norm        = normalize(alpha_uw, method = "range", range = c(0, 1)),
+      alpha_w_norm         = normalize(alpha_w, method = "range", range = c(0, 1)),
+      
+      # PageRank measures
+      page_rank_uw_norm    = normalize(page_rank_uw, method = "range", range = c(0, 1)),
+      page_rank_w_norm     = normalize(page_rank_w, method = "range", range = c(0, 1))
+    ) %>%
+    ungroup()
   
-  # Panel normalization (percentile) 
+  # ---- Panel-wide percentiles ----
   jurisdiction_scores_percentile <- jurisdiction_scores %>%
     mutate(
-      #Strength measures
-      strength_out_per = percent_rank(strength_out),
-      strength_in_per = percent_rank(strength_in),
-      strength_total_per = percent_rank(strength_total),
+      strength_out_per    = percent_rank(strength_out),
+      strength_in_per     = percent_rank(strength_in),
+      strength_total_per  = percent_rank(strength_total),
       
-      #Degree
-      degree_out_per = percent_rank(degree_out), 
-      degree_in_per = percent_rank(degree_in), 
+      degree_out_per      = percent_rank(degree_out),
+      degree_in_per       = percent_rank(degree_in),
       
-      #Closeness
-      closeness_uw_per = percent_rank(closeness_uw),
-      closeness_w_per = percent_rank(closeness_w),
+      closeness_uw_per    = percent_rank(closeness_uw),
+      closeness_w_per     = percent_rank(closeness_w),
       
-      #Betwenness
-      betweenness_uw_per = percent_rank(betweenness_uw),
-      betweenness_w_per = percent_rank(betweenness_w),
+      betweenness_uw_per  = percent_rank(betweenness_uw),
+      betweenness_w_per   = percent_rank(betweenness_w),
       
-      #Eigen vector
       eigen_vector_uw_per = percent_rank(eigen_vector_uw),
-      eigen_vector_w_per = percent_rank(eigen_vector_w),
+      eigen_vector_w_per  = percent_rank(eigen_vector_w),
       
-      #Alpha
-      alpha_uw_per = percent_rank(alpha_uw),
-      alpha_w_per = percent_rank(alpha_w),
+      alpha_uw_per        = percent_rank(alpha_uw),
+      alpha_w_per         = percent_rank(alpha_w),
       
-      #Page Rank
-      page_rank_uw_per = percent_rank(page_rank_uw),
-      page_rank_w_per = percent_rank(page_rank_w)) %>%
-    
-    #Index computation
-    mutate(index_str_per = rowMeans(select(., c(strength_out_per, strength_in_per, strength_total_per))), #Select strength measures
-           index_uw_per = rowMeans(select(., c(degree_out_per, degree_in_per, closeness_uw_per, betweenness_uw_per, eigen_vector_uw_per, alpha_uw_per, page_rank_uw_per))), #Sleect unweighted centrality measures
-           index_w_per = rowMeans(select(., c(closeness_w_per, betweenness_w_per, eigen_vector_w_per, alpha_w_per, page_rank_w_per)))) %>% #Sleect weighted centrality measures
-    mutate(index_final_per = rowMeans(select(., c(index_str_per, index_uw_per, index_w_per))) * 100) %>%
-    select(year, name, country.name.en, region, weo_group_region, 
-           strength_out_per, strength_in_per, strength_total_per, 
-           degree_out_per, degree_in_per, 
-           closeness_uw_per, closeness_w_per,
-           betweenness_uw_per, betweenness_w_per,
-           eigen_vector_uw_per, eigen_vector_w_per, 
-           alpha_uw_per, alpha_w_per, 
-           page_rank_uw_per, page_rank_w_per,
-           index_str_per, index_uw_per, index_w_per, index_final_per)
+      page_rank_uw_per    = percent_rank(page_rank_uw),
+      page_rank_w_per     = percent_rank(page_rank_w)
+    )
   
-  # Add rank within each year
-  jurisdiction_scores_percentile_with_rank <- tibble()
-  
-  for(i in unique(jurisdiction_scores$year)){
-    temporary_dataframe <- jurisdiction_scores_percentile %>% 
-      filter(year == i) %>%
-      mutate(index_rank_per = rank(desc(index_final_per)))
-    
-    jurisdiction_scores_percentile_with_rank <- bind_rows(jurisdiction_scores_percentile_with_rank, temporary_dataframe)
-  }
-  
-  return(list(normalized = jurisdiction_scores_normalized, percentile = jurisdiction_scores_percentile_with_rank))
+  return(list(
+    normalized = jurisdiction_scores_normalized,
+    percentile = jurisdiction_scores_percentile
+  ))
 }
+
+
+#Test -----------
+
+trade_norm <- normalize_measures(trade_country_scores)$normalized 
+finance_norm <- normalize_measures(finance_country_scores)$normalized
+
+trade_per <- normalize_measures(trade_country_scores)$percentile
+finance_per <- normalize_measures(finance_country_scores)$percentile
+
+combined_norm <- trade_norm %>%
+  rename_with(~ paste0("trade_",.),
+              -c(year, name, country.name.en, region, weo_group_region)) %>%
+  inner_join(
+    finance_norm %>% 
+      rename_with(~ paste0("fin_",.),
+                  -c(year, name, country.name.en, region, weo_group_region)),
+    by = c("year", "name", "country.name.en", "region", "weo_group_region")
+  )
+
+combined_per<- trade_per %>%
+  rename_with(~ paste0("trade_",.),
+              -c(year, name, country.name.en, region, weo_group_region)) %>%
+  inner_join(
+    finance_per %>% 
+      rename_with(~ paste0("fin_",.),
+                  -c(year, name, country.name.en, region, weo_group_region)),
+    by = c("year", "name", "country.name.en", "region", "weo_group_region")
+  )
 
 #2.3 Principal Component Analysis (PCA)-----
 

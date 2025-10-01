@@ -616,7 +616,7 @@ bind_rows(
   
 
 
-# 2.9 COMBINED DATASET  -----
+# 2.9 Combined Database -----
 dataset_base <- bind_rows(
   
   # IMTS Exports
@@ -828,7 +828,7 @@ dataset_base %>%
   )
 
 # Summary by source (value nominal)
-summary_by_source_nom <- dataset_base %>%
+dataset_base %>%
   group_by(source) %>%
   summarise(
     Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
@@ -843,10 +843,9 @@ summary_by_source_nom <- dataset_base %>%
     .groups = 'drop'
   )
 
-print(summary_by_source_nom)
 
 # Summary by source (value cons)
-summary_by_source_cons <- dataset_base %>%
+dataset_base %>%
   group_by(source) %>%
   summarise(
     Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
@@ -861,18 +860,82 @@ summary_by_source_cons <- dataset_base %>%
     .groups = 'drop'
   )
 
-print(summary_by_source_cons)
+# 2.11 Countries by year and source-----
+countries_by_year <-
+  dataset_base %>%
+  select(year, jurisdiction_iso3, counterpart_iso3, source) %>%
+  pivot_longer(cols = c(jurisdiction_iso3, counterpart_iso3), names_to = "type", values_to = "country_iso3") %>%
+  distinct(year, country_iso3, source) %>%
+  group_by(year, source) %>%
+  summarize(countries = list(unique(country_iso3)), .groups = 'drop') %>%
+  mutate(n_countries = lengths(countries)) #Lengths of lists
+
+# 2.12 Common countries by year and source----
+
+# Selected sources
+selected_sources <- c("IMTS Exports", "DIP Outward", "PIP Assets", "LBS Liabilities")
+
+common_countries_by_year <- countries_by_year %>%
+  filter(source %in% selected_sources) %>% #Filter for restricting to a subset of datasets
+  group_by(year) %>%
+  filter(n() > 1) %>%
+  reframe(common = list(reduce(countries, intersect))) %>%
+  mutate(n_common = lengths(common))
+
+gc()
+
+# 2.13 Filtered base -----
+dataset_base_filtered <- dataset_base %>%
+  left_join(common_countries_by_year, by = "year") %>%
+  rowwise() %>%
+  filter(jurisdiction_iso3 %in% common, counterpart_iso3 %in% common) %>%
+  ungroup() %>%
+  select(-common, -n_common) %>%
+  filter(source %in% selected_sources) %>%
+  filter(year >= 2009 & year < 2024)
+
+gc()
+
+# Summary filtered base
+
+# Summary by source (value nominal)
+dataset_base_filtered  %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj, na.rm = TRUE),
+    Max = max(value_adj, na.rm = TRUE),
+    Mean = mean(value_adj, na.rm = TRUE),
+    Median = median(value_adj, na.rm = TRUE),
+    `Std Dev` = sd(value_adj, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Summary by source (value cons)
+dataset_base_filtered  %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj_cons, na.rm = TRUE),
+    Max = max(value_adj_cons, na.rm = TRUE),
+    Mean = mean(value_adj_cons, na.rm = TRUE),
+    Median = median(value_adj_cons, na.rm = TRUE),
+    `Std Dev` = sd(value_adj_cons, na.rm = TRUE),
+    .groups = 'drop'
+  )
 
 # CHECKPOINT, save environment and data sets
 save.image(file = file.path(data_dir, "session_checkpoint_S2.RData"))
 gc()
 file.remove("data/session_checkpoint_S1.RData")
 
-# Add date to databse
-dataset_base <- dataset_base %>%
-  mutate(date = as.Date(paste0(year, "-12-31")))
-
-# Save CSV of consolidated datase 
+# Save CSV of consolidated database 
 write.csv(dataset_base, file.path(data_dir, "trade_finance_network_data.csv"), row.names = FALSE, fileEncoding = "UTF-8", na = "")
 
 # Save CSV of consolidated data compressed to upload into GitHub
@@ -887,84 +950,3 @@ rm(dip_inwd_base, dip_otwd_base,
    pip_asset_base, pip_liabilities_base, 
    lbs_base, lbs_claims_base, lbs_liabilities_base,
    pb)
-
-# 2.11 countries by year and source-----
-countries_by_year <-
-  dataset_base %>%
-  select(year, jurisdiction_iso3, counterpart_iso3, source) %>%
-  pivot_longer(cols = c(jurisdiction_iso3, counterpart_iso3), names_to = "type", values_to = "country_iso3") %>%
-  distinct(year, country_iso3, source) %>%
-  group_by(year, source) %>%
-  summarize(countries = list(unique(country_iso3)), .groups = 'drop') %>%
-  mutate(n_countries = lengths(countries)) #Lengths of lists
-
-# 2.11.2 Graph of available countries by year
-countries_by_year %>%
-  ggplot(aes(x = year, y = n_countries, color = source)) +
-  geom_line(linewidth = 1) +
-  # facet_wrap(~source, ncol = 4, scales = "fixed") +
-  theme_minimal()
-
-# 2.12 Common countries by year and source----
-common_countries_by_year <- countries_by_year %>%
-  filter(source %in% c("IMTS Exports", "DIP Outward", "PIP Assets", "LBS Liabilities")) %>% #Filter for restricting to a subset of datasets
-  group_by(year) %>%
-  filter(n() > 1) %>%
-  reframe(common = list(reduce(countries, intersect))) %>%
-  mutate(n_common = lengths(common))
-
-gc()
-
-# 2.12.1 Graph of available countries by year
-common_countries_by_year %>%
-  ggplot(aes(x = year, y = n_common)) +
-  geom_line(linewidth = 1) +
-  theme_minimal()
-
-# 2.13 Filtered base -----
-dataset_base_filtered <- dataset_base %>%
-  left_join(common_countries_by_year, by = "year") %>%
-  rowwise() %>%
-  filter(jurisdiction_iso3 %in% common, counterpart_iso3 %in% common) %>%
-  ungroup() %>%
-  select(-common, -n_common)
-
-gc()
-
-# Summary filtered base
-
-# Summary by source (value nominal)
-summary_by_source_nom_fil <- dataset_base_filtered  %>%
-  group_by(source) %>%
-  summarise(
-    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
-    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
-    Links = n(),
-    Confidential = sum(obs_status == "C", na.rm = TRUE),
-    Min = min(value_adj, na.rm = TRUE),
-    Max = max(value_adj, na.rm = TRUE),
-    Mean = mean(value_adj, na.rm = TRUE),
-    Median = median(value_adj, na.rm = TRUE),
-    `Std Dev` = sd(value_adj, na.rm = TRUE),
-    .groups = 'drop'
-  )
-
-print(summary_by_source_nom_fil)
-
-# Summary by source (value cons)
-summary_by_source_cons_fil <- dataset_base_filtered  %>%
-  group_by(source) %>%
-  summarise(
-    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
-    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
-    Links = n(),
-    Confidential = sum(obs_status == "C", na.rm = TRUE),
-    Min = min(value_adj_cons, na.rm = TRUE),
-    Max = max(value_adj_cons, na.rm = TRUE),
-    Mean = mean(value_adj_cons, na.rm = TRUE),
-    Median = median(value_adj_cons, na.rm = TRUE),
-    `Std Dev` = sd(value_adj_cons, na.rm = TRUE),
-    .groups = 'drop'
-  )
-
-print(summary_by_source_cons_fil)

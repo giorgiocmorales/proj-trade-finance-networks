@@ -236,10 +236,10 @@
 "Åland Islands","AX","ALA",,"ALA","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
 "Kosovo","XK","XKX",967,"KOS","Europe","Europe & Central Asia","Emerging Economies","Emerging and Developing Europe",TRUE,TRUE,TRUE,TRUE
 "Netherlands Antilles","AN","ANT",353,"ANT","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
-"Curacao & St. Maarten","1C_355","CUW",355,"CWX","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
-"West Bank and Gaza",,"WBG",487,"WBG","Asia","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Curacao & St. Maarten","1C_355","CWX",355,"CWX","Americas","Latin America & Caribbean","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
+"Palestinian Territories","PS","PSE",487,"WBG","Asia","Middle East & North Africa","Emerging Economies","Middle East and Central Asia",TRUE,TRUE,TRUE,TRUE
 "Jersey","JE","JEY",,"TX117","Europe","Europe & Central Asia","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
-"Western Sahara","EH","ESH",,"TX793","Africas","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
+"Western Sahara","EH","ESH",,"TX793","Africa","Middle East & North Africa","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
 "Bouvet Island","BT","BVT",,"TX865","Antartica","Antartica","WEO Not-Monitored","WEO Not-Monitored",FALSE,FALSE,TRUE,FALSE
 "Cocos (Keeling) Islands","CC","CCK",,"TX871","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",FALSE,TRUE,FALSE,FALSE
 "Christmas Island","CX","CXR",,"CXR","Oceania","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
@@ -250,11 +250,11 @@
 "Mayotte","YT","MYT",,"MYT","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
 "British Indian Ocean Territory","IO","IOT",,"MYT","Asia","East Asia & Pacific","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
 "French Southern Territories","TF","ATF",,"ATF","Africa","Sub-Saharan Africa","WEO Not-Monitored","WEO Not-Monitored",TRUE,TRUE,TRUE,TRUE
-"Czechoslovakia",,"CSK",934,"CSK","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
-"German Democratic Republic",,"DDR",278,"DDR","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
-"Serbia and Montenegro",,"SCG",891,"SCG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
-"Union of Soviet Socialist Republics (USSR)",,"SUN",810,"SUN","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Czechoslovakia","C9","CSK",934,"CSK","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"German Democratic Republic","DD","DDR",278,"DDR","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Serbia and Montenegro","CS","SCG",891,"SCG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Union of Soviet Socialist Republics (USSR)","SU","SUN",810,"SUN","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
 "Vietnam, Democratic Republic of",,"VDR",,"VDR","Asia","East Asia & Pacific","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
 "Yemen Arab Republic",,"YAR",,"YAR","Asia","Middle East & North Africa","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
 "Yemen People's Republic",,"YMD",720,"YMD","Asia","Middle East & North Africa","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
-"Yugoslavia",,"YUG",188,"YUG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE
+"Yugoslavia","YU","YUG",188,"YUG","Europe","Europe & Central Asia","Former Countries","Former Countries",TRUE,TRUE,TRUE,TRUE

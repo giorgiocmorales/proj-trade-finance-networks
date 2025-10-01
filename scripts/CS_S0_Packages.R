@@ -1,6 +1,6 @@
 #CUNTO SANTANA (20XX)
 
-# INSTALL AND LOAD PACKAGES ------
+# INSTALL AND LOAD PACKAGES ----
 
 # 0.1 Function to check and load packages ----
 load_packages <- function(packages) {

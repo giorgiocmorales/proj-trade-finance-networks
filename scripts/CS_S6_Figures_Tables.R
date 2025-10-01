@@ -2,6 +2,140 @@
 
 # 6 FIGURES AND TABLES
 
+
+# X. Datasets tables and graphs --------
+
+
+# Countries by source ---------------
+
+# 2.11.2 Graph of available countries by year
+countries_by_year %>%
+  ggplot(aes(x = year, y = n_countries, color = source)) +
+  geom_line(linewidth = 1) +
+  # facet_wrap(~source, ncol = 4, scales = "fixed") +
+  theme_minimal()
+
+# 2.12.1 Graph of available countries by year
+common_countries_by_year %>%
+  ggplot(aes(x = year, y = n_common)) +
+  geom_line(linewidth = 1) +
+  theme_minimal()
+
+# Summaries by source ---------------
+
+# Summary by source all datasets (value nominal)
+summary_by_source_nom <- dataset_base %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj, na.rm = TRUE),
+    Max = max(value_adj, na.rm = TRUE),
+    Mean = mean(value_adj, na.rm = TRUE),
+    Median = median(value_adj, na.rm = TRUE),
+    `Std Dev` = sd(value_adj, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+print(summary_by_source_nom)
+
+# Summary by source all datasets (value cons)
+summary_by_source_cons <- dataset_base %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj_cons, na.rm = TRUE),
+    Max = max(value_adj_cons, na.rm = TRUE),
+    Mean = mean(value_adj_cons, na.rm = TRUE),
+    Median = median(value_adj_cons, na.rm = TRUE),
+    `Std Dev` = sd(value_adj_cons, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+print(summary_by_source_cons)
+
+# Summary by source all datsets (value nominal)
+summary_by_source_nom_fil <- dataset_base_filtered  %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj, na.rm = TRUE),
+    Max = max(value_adj, na.rm = TRUE),
+    Mean = mean(value_adj, na.rm = TRUE),
+    Median = median(value_adj, na.rm = TRUE),
+    `Std Dev` = sd(value_adj, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+print(summary_by_source_nom_fil)
+
+# Summary by source (value cons)
+summary_by_source_cons_fil <- dataset_base_filtered  %>%
+  group_by(source) %>%
+  summarise(
+    Period = paste(min(year, na.rm = TRUE), max(year, na.rm = TRUE), sep = "-"),
+    Areas = n_distinct(c(jurisdiction_iso3, counterpart_iso3)),
+    Links = n(),
+    Confidential = sum(obs_status == "C", na.rm = TRUE),
+    Min = min(value_adj_cons, na.rm = TRUE),
+    Max = max(value_adj_cons, na.rm = TRUE),
+    Mean = mean(value_adj_cons, na.rm = TRUE),
+    Median = median(value_adj_cons, na.rm = TRUE),
+    `Std Dev` = sd(value_adj_cons, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+print(summary_by_source_cons_fil)
+
+
+# X Datasets comparison
+
+# Function to align direction based on direction map
+align_direction <- function(data, value_column, direction_map) {
+  data %>% 
+    mutate(weight = .data[[value_column]]) %>%
+    mutate(
+      invert = direction_map[source],
+      from = ifelse(invert, counterpart_iso3, jurisdiction_iso3),
+      to   = ifelse(invert, jurisdiction_iso3, counterpart_iso3)
+    ) %>%
+    select(year, from, to, source, weight)
+}
+
+# Function to compare two aligned datasets
+compare_sources <- function(data_A, data_B, name_A, name_B) {
+  joined <- full_join(data_A, data_B, by = c("year", "from", "to"), suffix = c("_A", "_B"))
+  
+  summary_stats <- joined %>%
+    mutate(match_flag = !is.na(weight_A) & !is.na(weight_B)) %>%
+    summarise(
+      total_A = sum(!is.na(weight_A)),
+      total_B = sum(!is.na(weight_B)),
+      matched = sum(match_flag),
+      jaccard = matched / n_distinct(c(paste(from[!is.na(weight_A)], to[!is.na(weight_A)], year[!is.na(weight_A)]),
+                                       paste(from[!is.na(weight_B)], to[!is.na(weight_B)], year[!is.na(weight_B)]))),
+      cor_log = cor(log1p(weight_A[match_flag]), log1p(weight_B[match_flag]), use = "complete.obs"),
+      mean_diff_pct = mean(abs(weight_A[match_flag] - weight_B[match_flag]) / pmax(weight_A[match_flag], weight_B[match_flag]) * 100, na.rm = TRUE),
+      A_only = sum(!is.na(weight_A) & is.na(weight_B)),
+      B_only = sum(!is.na(weight_B) & is.na(weight_A))
+    ) %>%
+    mutate(source_A = name_A, source_B = name_B) %>%
+    select(source_A, source_B, everything())
+  
+  return(list(summary = summary_stats, raw = joined))
+}
+
+# 
+
+
 # X.  Visualizations and results---------
 
 # Define color palettes for regions and WEO groups

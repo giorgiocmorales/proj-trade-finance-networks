@@ -1,8 +1,10 @@
 # CUNTO SANTANA (20XX)
 
-# DATABASE CHECK AND COUNTRY SET -----
 
-# 1.0 RETRIEVE AND INSPECT AVAILABLE IMF DATASETS ------------------------------
+# DATABASE CHECK AND COUNTRY SET ------------------------------------------
+
+
+# 1.0 RETRIEVE AND INSPECT AVAILABLE IMF DATASETS -------------------------
 
 # 1.0.1 Load all dataflows (available IMF datasets)
 imf_dataflows <- readSDMX(providerId = "IMF_DATA", resource = "dataflow")
@@ -25,7 +27,8 @@ print(head(dataset_table, 10))
 rm(imf_dataflows)
 gc()
 
-# 1.1 IMTS METADATA EXTRACTION --------------------------------------------------
+
+# 1.1 IMTS METADATA EXTRACTION --------------------------------------------
 
 # 1.1.1 Load structure definition
 imts_structure <- readSDMX(providerId = "IMF_DATA", resource = "datastructure", flowRef = "IMTS")
@@ -77,7 +80,8 @@ rm(extract_imts_codelist_df)
 
 gc()
 
-# 1.2 DIP METADATA EXTRACTION ---------------------------------------------------
+
+# 1.2 DIP METADATA EXTRACTION ---------------------------------------------
 
 # 1.2.1 Load structure
 dip_structure <- readSDMX(providerId = "IMF_DATA", resource = "datastructure", flowRef = "DIP")
@@ -131,7 +135,8 @@ rm(dip_structure, dip_structure_list, dip_structure_ids, dip_structure_index, di
 rm(extract_dip_codelist_df)
 gc()
 
-# 1.3 PIP METADATA EXTRACTION ---------------------------------------------------
+
+# 1.3 PIP METADATA EXTRACTION ---------------------------------------------
 
 # 1.3.1 Load structure
 pip_structure <- readSDMX(providerId = "IMF_DATA", resource = "datastructure", flowRef = "PIP")
@@ -229,7 +234,8 @@ rm(pip_structure, pip_structure_list, pip_structure_ids, pip_structure_index, pi
 rm(extract_pip_codelist_df)
 gc()
 
-# 1.4 WEO METADATA EXTRACTION ---------------------------------------------------
+
+# 1.4 WEO METADATA EXTRACTION  --------------------------------------------
 
 # 1.4.1 Load structure
 weo_structure <- readSDMX(providerId = "IMF_DATA", resource = "datastructure", flowRef = "WEO")
@@ -280,7 +286,8 @@ rm(weo_structure, weo_structure_list, weo_structure_ids, weo_structure_index, we
 rm(extract_weo_codelist_df)
 gc()
 
-# 1.5 COUNTRY SET -----
+
+# 1.5 COUNTRY SET ---------------------------------------------------------
 
 # 1.5.1 Load codelist
 data("codelist")
